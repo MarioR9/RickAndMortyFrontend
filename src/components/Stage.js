@@ -22,7 +22,7 @@ export default class Stage extends React.Component{
                {<Rick rick={this.props.rick}/>}
                
             </div>
-                <div style ={{
+                {/* <div style ={{
                      position: "absolute",
                      top:'751px',
                      left: '100px',
@@ -33,7 +33,7 @@ export default class Stage extends React.Component{
                         }}
                      className="Card">
                 <h1>Hello</h1>
-                </div>
+                </div> */}
                 </fragment>
            
    

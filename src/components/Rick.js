@@ -1,7 +1,9 @@
 import React from 'react'
-import rick from '../assets/pickleRickSpriteF.png'
+import rick from '../assets/PickleRickProfile.png'
 import Spritesheet from 'react-responsive-spritesheet'
 import Morty from '../assets/mortysprite.png'
+import { Card, Icon, Image } from 'semantic-ui-react'
+
 
 
 export default class Rick extends React.Component{
@@ -50,7 +52,9 @@ export default class Rick extends React.Component{
             left:  this.state.movex,
             width: '80px'
                 
-            }}>
+            }}> 
+            {this.props.rick.name} 😎
+            {this.props.rick.age}
           
           <Spritesheet
                 className={`my-element__class--style`}
@@ -69,9 +73,28 @@ export default class Rick extends React.Component{
                 }}/>
                 
              </div >
-             {/* <div >
-                {this.props.rick.morties.map(morty => <Morty/>)}
-            </div> */}
+             <Card.Group 
+                        style={{
+                            position: 'absolute',
+                            top: 500,
+                            left: 20}}
+                        itemsPerRow={6}>
+                   {this.props.rick.morties.map(morty => 
+                   <Card raised image={
+                    <Spritesheet
+                    className={`my-element__class--style`}
+                    image={Morty}
+                    widthFrame={128}
+                    heightFrame={159}
+                    steps={4}
+                    fps={6}
+                    autoplay={true}
+                    loop={true}
+                    />       
+                       }               
+                                                             
+                     />)}
+                </Card.Group>
          </div>
             </fragment>
            
