@@ -10,19 +10,31 @@ export default class Stage extends React.Component{
         // let t =this 
         // debugger
         return (
-            
+            <fragment>
             <div style={{
                 position: 'absolute',
-                top: '0px',
-                left: '0px',
+                top: '100px',
+                left: '100px',
                 backgroundImage: `url('${map}')`,
                 backgroundPosition: '0, 0',
-                width: '100%',
-                height: '100%',}} >
+                width: '85%',
+                height: '65%',}} >
                {<Rick rick={this.props.rick}/>}
                
             </div>
-              
+                <div style ={{
+                     position: "absolute",
+                     top:'751px',
+                     left: '100px',
+                     backgroundColor: "black",
+                     backgroundPosition: '0, 0',
+                     width: '85%',
+                     height: '20%'
+                        }}
+                     className="Card">
+                <h1>Hello</h1>
+                </div>
+                </fragment>
            
    
     

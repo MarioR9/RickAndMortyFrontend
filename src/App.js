@@ -3,6 +3,7 @@ import LoginPage from './components/LoginPage'
 import './App.css';
 import ProfilePage from './components/ProfilePage';
 import Stage from './components/Stage'
+import NewUser from './components/NewUser';
 
 
 export default class App extends React.Component {
@@ -11,10 +12,14 @@ export default class App extends React.Component {
       super()
       this.state={
         ricks: [],
-        loginPage: false,
+        loginPage: true,
         profilePage: false,
         stageMode: false,
-        name: ""
+        newUserPage: false,
+        currentRick: [],
+        name: "",
+        age: 0,
+        newMortyName: ""
         }
       }
      
@@ -26,43 +31,101 @@ export default class App extends React.Component {
             this.setState({
                 ricks: data
             })
-        })
-        this.handleLogIn()
-       
+        })   
     }
+
     handleUser=(e)=>{
       console.log(e.currentTarget.value)
       this.setState({
         name: e.currentTarget.value
       })
-      
-       
+    }
+     handleAge=(e)=>{
+      console.log(e.currentTarget.value)
+      this.setState({
+        age: e.currentTarget.value
+      })  
+    }
+     handleMortyName=(e)=>{
+      console.log(e.currentTarget.value)
+      this.setState({
+        newMortyName: e.currentTarget.value
+        })
    }
    
    handleLogIn=()=>{
-     if(this.state.ricks.find(rick =>rick.name === this.state.name)){
-       this.setState({
+    fetch('http://localhost:3000/login',{
+      method: "POST",
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: this.state.name
+      })
+    })
+    .then(resp=>resp.json())
+    .then(data=>{
+      if(data.name){
+      this.setState({
+        currentRick: data,
+        loginPage: false,
         profilePage: true
-       })}
-   }
-   handleFoundRick=()=>{
-    //  debugger
-   return this.state.ricks.find(rick =>rick.name === this.state.name)
-   }
+       })
+    }else{
+      alert(data.message)
+    }
+    })
+    
+    }
+    handleNewUserCreationSubmit=()=>{
+      // debugger
+      fetch('http://localhost:3000/ricks',{
+	      method: "POST",
+		  headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: this.state.name,
+          age: this.state.age,
+          mortyName: this.state.newMortyName		
+      })
+    })
+    .then(resp=>resp.json())
+    .then(newRick=>{
+      
+      this.setState({
+        currentRick: newRick,
+        profilePage: true 
+      })
+    })
+    
+    }
+  
+   
    handlePlayMode=()=>{
      this.setState({
       stageMode: true,
       profilePage: false
      })
    }
+   handleNewUserCreation=()=>{
+     this.setState({
+      loginPage: false,
+      newUserPage: true
+     })
+   }
    
    handlePage=()=>{
      if(this.state.profilePage === true ){
-       return <ProfilePage handlePlayMode={this.handlePlayMode} rick={this.handleFoundRick()}/>  
+       return <ProfilePage handlePlayMode={this.handlePlayMode} rick={this.state.currentRick}/>  
      }else if(this.state.stageMode === true){
-       return <Stage rick={this.handleFoundRick()}/>
-     }else{
-       return <LoginPage handleUser={this.handleUser} handleLogIn={this.handleLogIn}/>
+       return <Stage rick={this.state.currentRick}/>
+     }else if(this.state.loginPage === true){
+       return <LoginPage handleUser={this.handleUser} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
+     }else if(this.state.newUserPage === true){
+       return <NewUser handleNewUserCreationSubmit={this.handleNewUserCreationSubmit} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
      }
    }
 

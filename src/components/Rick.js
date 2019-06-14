@@ -1,7 +1,8 @@
 import React from 'react'
-import rick from '../assets/rickmovef.png'
+import rick from '../assets/pickleRickSpriteF.png'
 import Spritesheet from 'react-responsive-spritesheet'
-import Morty from './Morty'
+import Morty from '../assets/mortysprite.png'
+
 
 export default class Rick extends React.Component{
     constructor(){
@@ -46,7 +47,10 @@ export default class Rick extends React.Component{
         <div style={{
             position: 'absolute',
             top:   this.state.movey,
-            left:  this.state.movex}}>
+            left:  this.state.movex,
+            width: '80px'
+                
+            }}>
           
           <Spritesheet
                 className={`my-element__class--style`}
@@ -64,10 +68,10 @@ export default class Rick extends React.Component{
                     spritesheet.pause()
                 }}/>
                 
-             </div>
-             <div>
+             </div >
+             {/* <div >
                 {this.props.rick.morties.map(morty => <Morty/>)}
-            </div>
+            </div> */}
          </div>
             </fragment>
            

@@ -1,9 +1,5 @@
 import React from 'react'
 
-
-
-
-
 export default class LoginPage extends React.Component{
 
     
@@ -16,6 +12,9 @@ export default class LoginPage extends React.Component{
                 <h3>User Name here</h3>
                 <input onChange={this.props.handleUser} type="text"/>
                 <button onClick={this.props.handleLogIn}>LonIN</button>
+                <div>
+                    <button onClick={this.props.handleNewUserCreation}>Create an Account</button>
+                </div>
                    
 
             </div>
