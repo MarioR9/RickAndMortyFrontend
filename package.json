@@ -5,6 +5,8 @@
   "dependencies": {
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-game-kit": "^1.0.6",
+    "react-responsive-spritesheet": "^2.3.9",
     "react-scripts": "3.0.1"
   },
   "scripts": {
