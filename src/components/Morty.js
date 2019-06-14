@@ -10,7 +10,7 @@ export default class Morty extends React.Component{
             <div>
                 <div style={{
                         position: 'absolute',
-                        top:   800,
+                        top:   520,
                         left:  0}}>
                 <Spritesheet
                         className={`my-element__class--style`}

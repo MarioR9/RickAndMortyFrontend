@@ -12,7 +12,7 @@ export default class Rick extends React.Component{
         }
     }
     componentDidMount=()=>{
-        document.addEventListener('keydown', this.rickMovement,this.loadImage)
+        document.addEventListener('keydown', this.rickMovement)
         
     }
     
@@ -38,10 +38,8 @@ export default class Rick extends React.Component{
         }
     }
     render(){
-
-            // let t = this 
-            // debugger
-            
+// let t = this
+// debugger
         return(
     <fragment>  
         <div>
@@ -68,7 +66,7 @@ export default class Rick extends React.Component{
                 
              </div>
              <div>
-                {this.props.rick.morties.map(rick => <Morty/>)}
+                {this.props.rick.morties.map(morty => <Morty/>)}
             </div>
          </div>
             </fragment>
