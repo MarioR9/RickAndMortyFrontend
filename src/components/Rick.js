@@ -1,7 +1,7 @@
 import React from 'react'
-import rick from '../assets/PickleRickProfile.png'
+import pickleRick from '../assets/Ricks/walkingSprites/pickleRick.png'
 import Spritesheet from 'react-responsive-spritesheet'
-import Morty from '../assets/mortysprite.png'
+import DevilMorty from '../assets/Morties/walkingSprites/DevilMorty.png'
 import { Card, Icon, Image } from 'semantic-ui-react'
 
 
@@ -50,7 +50,7 @@ export default class Rick extends React.Component{
             position: 'absolute',
             top:   this.state.movey,
             left:  this.state.movex,
-            width: '80px'
+            width: '130px'
                 
             }}> 
             {this.props.rick.name} 😎
@@ -58,7 +58,7 @@ export default class Rick extends React.Component{
           
           <Spritesheet
                 className={`my-element__class--style`}
-                image={rick}
+                image={pickleRick}
                 widthFrame={128}
                 heightFrame={159}
                 steps={4}
@@ -83,7 +83,7 @@ export default class Rick extends React.Component{
                    <Card raised image={
                     <Spritesheet
                     className={`my-element__class--style`}
-                    image={Morty}
+                    image={DevilMorty}
                     widthFrame={128}
                     heightFrame={159}
                     steps={4}

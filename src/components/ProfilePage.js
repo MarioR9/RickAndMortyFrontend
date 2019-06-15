@@ -1,8 +1,8 @@
 import React from 'react'
 import { Card, Icon, Image } from 'semantic-ui-react'
-import pickeProfile from '../assets/pickeProfile.png'
+import pickleRickProfile from '../assets/Ricks/Profile/pickleRickProfile.png'
 import playButton from '../assets/PlayButton.png'
-import mortySprite from '../assets/mortysprite.png'
+import DevilMorty from '../assets/Morties/walkingSprites/DevilMorty.png'
 import Spritesheet from 'react-responsive-spritesheet'
 
 
@@ -17,9 +17,10 @@ export default class ProfilePage extends React.Component{
                <Card style={{
                         position: 'relative',
                         top:   90,
-                        left:  300}}>
+                        left:  300,
+                        }}>
 
-                    <Image src={pickeProfile} wrapped ui={false} />
+                    <Image src={pickleRickProfile} wrapped ui={false} />
                     <Card.Content>
                     <Card.Header>{name} Rick</Card.Header>
                     <Card.Meta>
@@ -45,7 +46,7 @@ export default class ProfilePage extends React.Component{
                         backgroundPosition: '100, 100',
                         width: '90px',
                         height: '90px',}}
-                        onClick={this.props.handlePlayMode}>Play
+                        onClick={this.props.handlePlayMode}>
                         
                 </button>
 
@@ -53,20 +54,20 @@ export default class ProfilePage extends React.Component{
                         style={{
                             position: 'absolute',
                             top: 200,
-                            left: 600}}
+                            left: 600,
+                            width: '1200px'}}
                         itemsPerRow={6}>
                    {morties.map(morty => <Card raised image={
-                                                             <Spritesheet
-                                                             className={`my-element__class--style`}
-                                                             image={mortySprite}
-                                                             widthFrame={128}
-                                                             heightFrame={159}
-                                                             steps={4}
-                                                             fps={6}
-                                                             autoplay={true}
-                                                             loop={true}
-                                                             />       
-                                                                }
+                             <Spritesheet
+                             className={`my-element__class--style`}
+                             image={DevilMorty}
+                             widthFrame={128}
+                             heightFrame={159}
+                             steps={4}
+                             fps={5}
+                             autoplay={true}
+                             loop={true}
+                             />}
                      />)}
                 </Card.Group>
 
