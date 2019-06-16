@@ -1,5 +1,5 @@
 import React from 'react'
-import GreaserMortyWalking from '../assets/Morties/walkingSprites/GreaserMortyWalking.png'
+import GreaserMorty from '../assets/Morties/walkingSprites/GreaserMorty.png'
 import Spritesheet from 'react-responsive-spritesheet'
 
 export default class Morty extends React.Component{
@@ -12,25 +12,21 @@ export default class Morty extends React.Component{
             position: 'absolute',
             top:   window.innerWidth/2,
             left:  window.innerHeight/2,
-            width: '130px'
+            width: '70px'
                 
             }}> 
   
           <Spritesheet
                 className={`my-element__class--style`}
-                image={GreaserMortyWalking}
+                image={GreaserMorty}
                 widthFrame={128}
                 heightFrame={159}
                 steps={4}
                 fps={6}
                 autoplay={true}
                 loop={true}
-                onMouseEnter={spritesheet => {
-                    spritesheet.play()
-                }}
-                onMouseLeave={spritesheet => {
-                    spritesheet.pause()
-                }}/>
+                
+                />
                 
              </div >
              </div>

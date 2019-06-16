@@ -62,48 +62,23 @@ export default class App extends React.Component {
         },
         body: JSON.stringify({
           name: this.state.name
+        })
       })
-    })
-    .then(resp=>resp.json())
-    .then(data=>{
-      if(data.name){
-      this.setState({
-        currentRick: data,
-        loginPage: false,
-        profilePage: true
-       })
-    }else{
-      alert(data.message)
-    }
-    })
-    
-    }
-    handleNewUserCreationSubmit=()=>{
-      // debugger
-      fetch('http://localhost:3000/ricks',{
-	      method: "POST",
-		  headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          name: this.state.name,
-          age: this.state.age,
-          mortyName: this.state.newMortyName		
+          .then(resp=>resp.json())
+          .then(data=>{
+            if(data.name){
+            this.setState({
+              currentRick: data,
+              loginPage: false,
+              profilePage: true
+            })
+          }else{
+            alert(data.message)
+        }
       })
-    })
-    .then(resp=>resp.json())
-    .then(newRick=>{
       
-      this.setState({
-        currentRick: newRick,
-        profilePage: true 
-      })
-    })
-    
     }
-  
-   
+
    handlePlayMode=()=>{
      this.setState({
       stageMode: true,
@@ -116,6 +91,12 @@ export default class App extends React.Component {
       newUserPage: true
      })
    }
+   handleCurrentUser=(newRick)=>{
+     this.setState({
+      currentRick: newRick,
+      profilePage: true
+     })
+   }
    
    handlePage=()=>{
      if(this.state.profilePage === true ){
@@ -125,7 +106,7 @@ export default class App extends React.Component {
      }else if(this.state.loginPage === true){
        return <LoginPage handleUser={this.handleUser} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
      }else if(this.state.newUserPage === true){
-       return <NewUser handleNewUserCreationSubmit={this.handleNewUserCreationSubmit} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
+       return <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
      }
    }
 

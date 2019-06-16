@@ -27,6 +27,7 @@ export default class Stage extends React.Component{
                     position: 'absolute',
                     top: '-500px',
                     left: '0px',
+                    width: 100
                     }} >
                 <Morty/>
                 </div>
