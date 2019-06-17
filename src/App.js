@@ -1,11 +1,12 @@
 import React from 'react';
+import {Route, Switch, Redirect} from 'react-router-dom'
 import LoginPage from './components/LoginPage'
 import './App.css';
 import ProfilePage from './components/ProfilePage';
 import Stage from './components/Stage'
 import NewUser from './components/NewUser';
 import OnlineMode from './components/OnlineMode'
-
+import EditUser from './components/EditUser'
 
 export default class App extends React.Component {
   
@@ -18,6 +19,7 @@ export default class App extends React.Component {
         stageMode: false,
         newUserPage: false,
         onlineMode: false,
+        editUser: false,
         currentRick: [],
         currentMorties: [],
         username: "",
@@ -87,19 +89,19 @@ export default class App extends React.Component {
             // debugger
             console.log(data.token)
             console.log(data.user)
-            if(data.user.username){
-            this.setState({
-              currentRick: data.user,
-              token: data.token,
-              currentMorties: data.morties,
-              loginPage: false,
-              profilePage: true
-            })
-            localStorage.setItem("token", data.token)
-          }else{
-            alert(data.message)
-      }
-    })
+            if(data.message){
+              alert(data.message)
+            }else{
+              this.setState({
+                currentRick: data.user,
+                token: data.token,
+                currentMorties: data.morties,
+                loginPage: false,
+                profilePage: true
+              })
+              localStorage.setItem("token", data.token)
+            }
+          })
       
   }
 
@@ -121,15 +123,25 @@ export default class App extends React.Component {
       currentRick: newRick.user,
       toke: newRick.token,
       currentMorties: newRick.morties,
-      profilePage: true
+      profilePage: true,
+  
      })
    }
    handleProfileUser=(profileUser,profileMorties)=>{
      this.setState({
        currentRick: profileUser,
-       currentMorties: profileMorties
+       currentMorties: profileMorties,
      })
    }
+   handleProfileForEditedUser=(profileUser,profileMorties)=>{
+    this.setState({
+      currentRick: profileUser,
+      currentMorties: profileMorties,
+      editUser: false,
+      profilePage: true
+    })
+  }
+  
    handleLogOut=()=>{
      localStorage.clear()
      this.setState({
@@ -153,26 +165,40 @@ export default class App extends React.Component {
        })
        localStorage.clear()
      }
+     handleEditUser=()=>{
+       this.setState({
+        editUser: true,
+        profilePage: false
+       })
+     }
    
    
    handlePage=()=>{
      if(this.state.profilePage === true ){
-       return <ProfilePage handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode}/>  
+      
+       return <ProfilePage handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
      }else if(this.state.stageMode === true){
+
        return <Stage rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
      }else if(this.state.loginPage === true){
+
        return <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
      }else if(this.state.newUserPage === true){
+
        return <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
      }else if(this.state.onlineMode === true){
        return <OnlineMode/>
+     }else if(this.state.editUser === true){
+       return <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
      }
    }
 
   render(){
-      return (
+    return (
       <div>
-      {this.handlePage()}
+      <button onClick={this.handleLogOut} >LogOut</button>
+          {this.handlePage()}
+       
       </div>
       )
     }

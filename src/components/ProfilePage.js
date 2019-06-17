@@ -82,10 +82,14 @@ export default class ProfilePage extends React.Component{
             SpookyGMorty,StrayCatMorty,SkeletonMorty,AquaMorty,FlamingMorty,FrozenMorty,
             PunkMorty,BananaMorty]
         
+
+
+
         const {username,age} = this.props.rick
         return(
             <div>
-                <button onClick={this.props.handleLogOut} >LogOut</button>
+
+              
                <Card style={{
                         position: 'relative',
                         top:   90,
@@ -94,13 +98,10 @@ export default class ProfilePage extends React.Component{
 
                     <Image src={characters[this.props.rick.avatar]} wrapped ui={false} />
                         <Card.Content>
-                            <Card.Header>{username}</Card.Header>
+                            <Card.Header>{username}<Icon onClick={this.props.handleEditUser} className="edit" /></Card.Header>
                                 <Card.Meta>
                                     <span className='date'> Age: {age}</span>
                                 </Card.Meta>
-                                <Card.Description>
-                                    Matthew is a musician living in Nashville.
-                                </Card.Description>
                             </Card.Content>
                         <Card.Content extra>
                     <a>

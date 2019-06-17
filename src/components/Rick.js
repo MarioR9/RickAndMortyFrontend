@@ -130,15 +130,21 @@ export default class Rick extends React.Component{
                    <Card raised image={
                     <Spritesheet 
                     style={{
-                    backgroundColor: "#dadbde"}}
+                    backgroundColor: "#b33cf5"}}
                     className={`my-element__class--style`}
                     image={Morties[morty.morty]}
                     widthFrame={128}
                     heightFrame={159}
                     steps={4}
-                    fps={6}
-                    autoplay={true}
+                    fps={8}
+                    autoplay={false}
                     loop={true}
+                    onMouseEnter={spritesheet => {
+                        spritesheet.play();
+                      }}
+                      onMouseLeave={spritesheet => {
+                        spritesheet.pause();
+                      }}
                     />       
                        }               
                                                              
