@@ -17,7 +17,8 @@ export default class App extends React.Component {
         stageMode: false,
         newUserPage: false,
         currentRick: [],
-        name: "",
+        username: "",
+        password: "",
         age: 0,
         newMortyName: ""
         }
@@ -37,7 +38,13 @@ export default class App extends React.Component {
     handleUser=(e)=>{
       console.log(e.currentTarget.value)
       this.setState({
-        name: e.currentTarget.value
+        username: e.currentTarget.value
+      })
+    }
+    handlePassword=(e)=>{
+      console.log(e.currentTarget.value)
+      this.setState({
+        password: e.currentTarget.value
       })
     }
      handleAge=(e)=>{
@@ -61,14 +68,17 @@ export default class App extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: this.state.name
+          username: this.state.username,
+          password: this.state.password
         })
       })
           .then(resp=>resp.json())
           .then(data=>{
-            if(data.name){
+            console.log(data.token)
+            console.log(data.user)
+            if(data.user.username){
             this.setState({
-              currentRick: data,
+              currentRick: data.user,
               loginPage: false,
               profilePage: true
             })
@@ -92,6 +102,7 @@ export default class App extends React.Component {
      })
    }
    handleCurrentUser=(newRick)=>{
+     debugger
      this.setState({
       currentRick: newRick,
       profilePage: true
@@ -104,7 +115,7 @@ export default class App extends React.Component {
      }else if(this.state.stageMode === true){
        return <Stage rick={this.state.currentRick}/>
      }else if(this.state.loginPage === true){
-       return <LoginPage handleUser={this.handleUser} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
+       return <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
      }else if(this.state.newUserPage === true){
        return <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
      }

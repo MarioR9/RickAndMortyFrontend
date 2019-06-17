@@ -15,12 +15,15 @@ export default class LoginPage extends React.Component{
                 
                 
             <div class="column">
-                <h3>User Name here</h3>
+                <h3>Username</h3>
                 <input onChange={this.props.handleUser} type="text"/>
+                <br></br>
+                <h3>Password</h3>
+                <input onChange={this.props.handlePassword} type="text"/>
                 <br></br>
                 <button onClick={this.props.handleLogIn}>LonIN</button>
                 <div>
-                    <button onClick={this.props.handleNewUserCreation}>Create an Account</button>
+                <button onClick={this.props.handleNewUserCreation}>Create an Account</button>
                 </div>
             </div>
             

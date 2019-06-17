@@ -52,6 +52,7 @@ export default class ProfilePage extends React.Component{
     
     render(){
         let t = this
+        debugger
         let characters = [CowboyRick,DoofusRick,pickleRick,SuperFanRick,
             Beth,GunkBeth,OriginalBeth,WastelandBeth,
             GunkJerry,Jerry,OriginalJerry,WastelandJerry,
@@ -63,7 +64,7 @@ export default class ProfilePage extends React.Component{
             SpookyGMorty,StrayCatMorty,SkeletonMorty,AquaMorty,FlamingMorty,FrozenMorty,
             PunkMorty,BananaMorty]
         
-        const {name,age,morties} = this.props.rick
+        const {username,age,morties} = this.props.rick
         return(
             <div>
                <Card style={{
@@ -72,9 +73,9 @@ export default class ProfilePage extends React.Component{
                         left:  300,
                         }}>
 
-                    <Image src={characters[this.props.rick.char]} wrapped ui={false} />
+                    <Image src={characters[this.props.rick.avatar]} wrapped ui={false} />
                         <Card.Content>
-                            <Card.Header>{name}</Card.Header>
+                            <Card.Header>{username}</Card.Header>
                                 <Card.Meta>
                                     <span className='date'> Age: {age}</span>
                                 </Card.Meta>

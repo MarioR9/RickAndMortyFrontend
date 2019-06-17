@@ -93,6 +93,7 @@ export default class NewUser extends React.Component{
             RickId: characters.indexOf(randomRick),
             MortyId: Morties.indexOf(randomMorty),
             PlayerName: "",
+            PlayerPassword: "",
             PlayerAge: ""
             
     
@@ -182,9 +183,10 @@ export default class NewUser extends React.Component{
       'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          name: this.state.PlayerName,
+          username: this.state.PlayerName,
+          password: this.state.PlayerPassword,
           age: this.state.PlayerAge,
-          char: this.state.RickId,
+          avatar: this.state.RickId,
           MortyId: this.state.MortyId		
       })
     })
@@ -196,6 +198,11 @@ export default class NewUser extends React.Component{
         
         this.setState({
             PlayerName: e.currentTarget.value})
+    }
+    handlePlayerPassword=(e)=>{
+        
+        this.setState({
+            PlayerPassword: e.currentTarget.value})
     }
     handlePlayerAge=(e)=>{
         
@@ -313,7 +320,11 @@ export default class NewUser extends React.Component{
             <Input onChange={this.handlePlayerName} type="text" placeholder="Name..."></Input>
             <br></br>
             <br></br>
+            <Input onChange={this.handlePlayerPassword} type="password" placeholder="Password..."></Input>
+            <br></br>
+            <br></br>
             <Input onChange={this.handlePlayerAge} type="text" placeholder="Age..."></Input>
+            <br></br>
             </div>
         </fragment>    
          </div>
