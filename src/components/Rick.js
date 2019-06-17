@@ -126,7 +126,7 @@ export default class Rick extends React.Component{
                     left: 20,
                     width: 800}}
                 itemsPerRow={6}>
-                   {this.props.rick.morties.map(morty => 
+                   {this.props.morties.map(morty => 
                    <Card raised image={
                     <Spritesheet 
                     style={{

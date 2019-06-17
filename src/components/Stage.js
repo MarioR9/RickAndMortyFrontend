@@ -12,6 +12,8 @@ export default class Stage extends React.Component{
         return (
             
             <div>
+                <button onClick={this.props.handleLogOut} >LogOut</button>
+                <button onClick={this.props.handleBackToProfile} >profile</button>
             <Container>
                 <div style={{
                     position: 'absolute',
@@ -21,7 +23,7 @@ export default class Stage extends React.Component{
                     backgroundPosition: '0, 0',
                     width: '85%',
                     height: '65%',}} >
-                {<Rick rick={this.props.rick}/>}
+                {<Rick rick={this.props.rick} morties={this.props.morties}/>}
                 </div>
                 <div className="morty" style={{
                     position: 'absolute',

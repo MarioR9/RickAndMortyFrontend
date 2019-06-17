@@ -173,7 +173,7 @@ export default class NewUser extends React.Component{
         })
     }
 
-    handleTeamCreating=(e)=>{
+    handleTeamCreation=(e)=>{
         console.log(e)
         let t= this 
     fetch('http://localhost:3000/ricks',{
@@ -304,7 +304,7 @@ export default class NewUser extends React.Component{
                  raised image={this.state.currentMorty}/>
 
                 <button onClick={this.handleRandomSelection}>Random</button>
-                <button onClick={this.handleTeamCreating}>Create</button>
+                <button onClick={this.handleTeamCreation}>Create</button>
             </Card.Group>
      
             

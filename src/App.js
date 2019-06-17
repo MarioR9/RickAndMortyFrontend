@@ -4,6 +4,7 @@ import './App.css';
 import ProfilePage from './components/ProfilePage';
 import Stage from './components/Stage'
 import NewUser from './components/NewUser';
+import OnlineMode from './components/OnlineMode'
 
 
 export default class App extends React.Component {
@@ -16,16 +17,25 @@ export default class App extends React.Component {
         profilePage: false,
         stageMode: false,
         newUserPage: false,
+        onlineMode: false,
         currentRick: [],
+        currentMorties: [],
         username: "",
         password: "",
         age: 0,
-        newMortyName: ""
+        newMortyName: "",
+        token: ""
         }
       }
      
 
     componentDidMount=()=>{
+      if(localStorage.getItem("token")){
+        this.setState({
+          loginPage: false,
+          profilePage: true
+        })
+      }
         fetch('http://localhost:3000/ricks')
         .then(resp=>resp.json())
         .then(data=>{
@@ -60,7 +70,7 @@ export default class App extends React.Component {
         })
    }
    
-   handleLogIn=()=>{
+  handleLogIn=()=>{
     fetch('http://localhost:3000/login',{
       method: "POST",
       headers: {
@@ -70,24 +80,28 @@ export default class App extends React.Component {
         body: JSON.stringify({
           username: this.state.username,
           password: this.state.password
+          })
         })
-      })
           .then(resp=>resp.json())
           .then(data=>{
+            // debugger
             console.log(data.token)
             console.log(data.user)
             if(data.user.username){
             this.setState({
               currentRick: data.user,
+              token: data.token,
+              currentMorties: data.morties,
               loginPage: false,
               profilePage: true
             })
+            localStorage.setItem("token", data.token)
           }else{
             alert(data.message)
-        }
-      })
+      }
+    })
       
-    }
+  }
 
    handlePlayMode=()=>{
      this.setState({
@@ -102,22 +116,56 @@ export default class App extends React.Component {
      })
    }
    handleCurrentUser=(newRick)=>{
-     debugger
+    //  debugger
      this.setState({
-      currentRick: newRick,
+      currentRick: newRick.user,
+      toke: newRick.token,
+      currentMorties: newRick.morties,
       profilePage: true
      })
    }
+   handleProfileUser=(profileUser,profileMorties)=>{
+     this.setState({
+       currentRick: profileUser,
+       currentMorties: profileMorties
+     })
+   }
+   handleLogOut=()=>{
+     localStorage.clear()
+     this.setState({
+       profilePage: false,
+       loginPage: true,
+       stageMode: false
+
+     })
+    }
+     handleBackToProfile=()=>{
+      this.setState({
+        stageMode: false,
+        profilePage: true
+ 
+      })
+     }
+     handleOnlineMode=()=>{
+       this.setState({
+        onlineMode: true,
+        profilePage: false
+       })
+       localStorage.clear()
+     }
+   
    
    handlePage=()=>{
      if(this.state.profilePage === true ){
-       return <ProfilePage handlePlayMode={this.handlePlayMode} rick={this.state.currentRick}/>  
+       return <ProfilePage handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode}/>  
      }else if(this.state.stageMode === true){
-       return <Stage rick={this.state.currentRick}/>
+       return <Stage rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
      }else if(this.state.loginPage === true){
        return <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
      }else if(this.state.newUserPage === true){
        return <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
+     }else if(this.state.onlineMode === true){
+       return <OnlineMode/>
      }
    }
 

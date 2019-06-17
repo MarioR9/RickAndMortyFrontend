@@ -49,10 +49,28 @@ import PunkMorty from '../assets/Morties/walkingSprites/PunkMorty.png'
 import BananaMorty from '../assets/Morties/walkingSprites/BananaMorty.png'
 
 export default class ProfilePage extends React.Component{
+
+
+    componentDidMount(){
+        //check localStorage has a token
+        let token = localStorage.getItem("token")
+        if(token){
+          fetch("http://localhost:3000/authenticate", {
+            headers: {
+              "Authentication" : `Bearer ${token}`
+            }
+          })
+          .then(res => res.json())
+          .then(data => {
+            this.props.handleProfileUser(data.user,data.morties)
+
+          })
+        }
+      }
     
     render(){
-        let t = this
-        debugger
+        // let t = this
+        // debugger
         let characters = [CowboyRick,DoofusRick,pickleRick,SuperFanRick,
             Beth,GunkBeth,OriginalBeth,WastelandBeth,
             GunkJerry,Jerry,OriginalJerry,WastelandJerry,
@@ -64,9 +82,10 @@ export default class ProfilePage extends React.Component{
             SpookyGMorty,StrayCatMorty,SkeletonMorty,AquaMorty,FlamingMorty,FrozenMorty,
             PunkMorty,BananaMorty]
         
-        const {username,age,morties} = this.props.rick
+        const {username,age} = this.props.rick
         return(
             <div>
+                <button onClick={this.props.handleLogOut} >LogOut</button>
                <Card style={{
                         position: 'relative',
                         top:   90,
@@ -86,7 +105,7 @@ export default class ProfilePage extends React.Component{
                         <Card.Content extra>
                     <a>
                         <Icon name='user' />
-                        {morties.length} Morties
+                        {this.props.morties.length} Morties
                     </a>
                     </Card.Content>
                 </Card>
@@ -102,6 +121,16 @@ export default class ProfilePage extends React.Component{
                         onClick={this.props.handlePlayMode}>
                         
                 </button>
+                <button onClick={this.props.handleOnlineMode}
+                        style={{
+                        position: 'absolute',
+                        top: 700,
+                        left: 700,
+                        // backgroundImage: `url('${playButton}')`,
+                        backgroundPosition: '100, 100',
+                        width: '90px',
+                        height: '90px',}} >ONLINE!</button>
+
                 <div style={{
                             position: 'absolute',
                             top: 90,
@@ -114,7 +143,7 @@ export default class ProfilePage extends React.Component{
                             left: 0,
                             width: 700}}
                         itemsPerRow={6}>
-                   {morties.map(morty => <Card raised image={
+                   {this.props.morties.map(morty => <Card raised image={
                     
                              <Spritesheet
                              style={{
