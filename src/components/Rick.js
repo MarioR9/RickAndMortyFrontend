@@ -1,6 +1,6 @@
 import React from 'react'
 import Spritesheet from 'react-responsive-spritesheet'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 
 
 import CowboyRick from '../assets/Ricks/walkingSprites/CowboyRick.png'
@@ -88,6 +88,7 @@ export default class Rick extends React.Component{
             {this.props.rick.age}
           
           <Spritesheet
+    
                 className={`my-element__class--style`}
                 image={characters[this.props.rick.char]}
                 widthFrame={128}
@@ -100,15 +101,17 @@ export default class Rick extends React.Component{
                 
              </div >
              <Card.Group 
-                        style={{
-                            position: 'absolute',
-                            top: 600,
-                            left: 20,
-                            width: 800}}
-                        itemsPerRow={6}>
+                style={{
+                    position: 'absolute',
+                    top: 600,
+                    left: 20,
+                    width: 800}}
+                itemsPerRow={6}>
                    {this.props.rick.morties.map(morty => 
                    <Card raised image={
                     <Spritesheet 
+                    style={{
+                    backgroundColor: "#dadbde"}}
                     className={`my-element__class--style`}
                     image={Morties[morty.morty]}
                     widthFrame={128}
@@ -124,10 +127,7 @@ export default class Rick extends React.Component{
                 </Card.Group>
          </div>
             </fragment>
-           
-            
-            
-        
+
         )
     }
 }

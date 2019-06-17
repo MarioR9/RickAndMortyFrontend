@@ -1,4 +1,6 @@
 import React from 'react'
+import Canvas from './Canvas'
+import Spritesheet from 'react-responsive-spritesheet'
 
 export default class LoginPage extends React.Component{
 
@@ -11,6 +13,7 @@ export default class LoginPage extends React.Component{
             <div class="ui middle aligned center aligned grid"
                 style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
                 
+                
             <div class="column">
                 <h3>User Name here</h3>
                 <input onChange={this.props.handleUser} type="text"/>
@@ -20,6 +23,7 @@ export default class LoginPage extends React.Component{
                     <button onClick={this.props.handleNewUserCreation}>Create an Account</button>
                 </div>
             </div>
+            
 
             </div>
         )
