@@ -46,7 +46,7 @@ export default class Stage extends React.Component{
         return (
             
             <div >
-               
+
                 <div   onClick={this.handleMortyLocation} style={{
                     position: 'absolute',
                     top: '100px',
@@ -66,19 +66,7 @@ export default class Stage extends React.Component{
                     <Morty currentMorty={this.state.currentMorty}/>
                 </div>
                 </div>
-                
-                
-                
-
-
-
             </div>
-               
-           
-   
-    
         )}
-
-
 }
 

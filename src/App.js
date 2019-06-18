@@ -236,6 +236,12 @@ export default class App extends React.Component {
         mortyPage: true
       })
     }
+    handleBackToLogin=()=>{
+      this.setState({
+        newUserPage: false,
+        loginPage: true
+      })
+    }
    
    
    handlePage=()=>{
@@ -255,7 +261,7 @@ export default class App extends React.Component {
        return <OnlineMode/>
      }else if(this.state.editUser === true){
        return <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
-     }else if(this.state.moryPage === true){
+     }else if(this.state.mortyPage === true){
       return <MyMorty/>
 
      }
@@ -268,6 +274,7 @@ export default class App extends React.Component {
       <a class="active red item" onClick={this.handleLogOut} >LogOut</a>
 
       {localStorage.getItem("token")?<a class="active purple item" onClick={this.handleBackToProfile} >Profile</a>:null}
+      {this.state.newUserPage === true ? <a class="active green item" onClick={this.handleBackToLogin} >Home</a>:null }
     
       </div>
       

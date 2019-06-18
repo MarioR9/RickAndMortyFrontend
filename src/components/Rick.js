@@ -1,6 +1,7 @@
 import React from 'react'
 import Spritesheet from 'react-responsive-spritesheet'
-import { Card,Button } from 'semantic-ui-react'
+import { Card,Button,Label} from 'semantic-ui-react'
+
 
 import CowboyRick from '../assets/Ricks/walkingSprites/CowboyRick.png'
 import DoofusRick from '../assets/Ricks/walkingSprites/DoofusRick.png'
@@ -63,13 +64,11 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
     HipsterMorty,RedShirtMorty,ExoAlphaMorty,PeaceMorty,SpookyGMorty,StrayCatMorty,SkeletonMorty,
     AquaMorty,FlamingMorty,FrozenMorty,PunkMorty,BananaMorty]
 
+
     
-//this.props.newMorty  currently tracking NewMorty
 
-//this.props.currentMorty == morty iD
-//this.props.rick.id 
 
-    export default class Rick extends React.Component{
+export default class Rick extends React.Component{
         constructor(){
             super()
             this.state={
@@ -77,6 +76,7 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
                 movex: 0
             }
         }
+
         componentDidMount=()=>{
             document.addEventListener('keydown', this.rickMovement)
             this.setState({
@@ -141,9 +141,9 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
             
        
                                 ]
-        //   console.log(MortyLocations)                      
-        let rickLocation = [[this.state.movey , this.state.movex]]                      
-        //  console.log(rickLocation)                   
+                           
+            let rickLocation = [[this.state.movey , this.state.movex]]                      
+                       
             if(MortyLocations.find(loc => loc.includes(rickLocation[0][0]) && loc.includes(rickLocation[0][1]))){
             console.log("Collision!")
             // debugger
@@ -152,7 +152,7 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
                 <div class="bg-modal" style={{display: 'flex'}}>
                    <div class="modal-contents">
                    <Button onClick={()=>{this.props.handleNewMorty(this.props.currentMorty)}}>Catch</Button>
-                    <Button>Kill_</Button>  
+                     
 
                    <Card style={{
                     position: 'absolute',
@@ -217,8 +217,11 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
             width: '80px'
                 
             }}> 
+             <Label as='a' color='tile' image>
+            {/* <img src='https://react.semantic-ui.com/images/avatar/small/veronika.jpg' /> */}
             {this.props.rick.username} 😎
             {this.props.rick.age}
+            </Label>
           
           <Spritesheet
     
@@ -233,6 +236,7 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
                 />
                 
              </div >
+
              <Card.Group 
                 style={{
                     position: 'absolute',
@@ -270,26 +274,3 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
         )
     }
 }
-// width: '128px',
-//             height: '159px',}}  
-            
-
-// spritesheetfullsize 
-// width: '520px',
-// height: '500px',
-
-/* <Spritesheet
-                className={`my-element__class--style`}
-                image={rick}
-                widthFrame={128}
-                heightFrame={159}
-                steps={4}
-                fps={6}
-                autoplay={true}
-                loop={true}
-                onMouseEnter={spritesheet => {
-                    spritesheet.play()
-                }}
-                onMouseLeave={spritesheet => {
-                    spritesheet.pause()
-                }}/>      */

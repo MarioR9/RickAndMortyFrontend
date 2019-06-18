@@ -21,7 +21,40 @@ export default class LoginPage extends React.Component{
             <div class="modal-contents">
 
                 <div  onClick={this.handleModalCLose}class="close">+</div>
-                <div className="column" style={{
+                <div class="ui placeholder segment">
+                    <div class="ui two column very relaxed stackable grid">
+                        <div class="column">
+                        <div class="ui form">
+                            <div class="field">
+                            <label>Username</label>
+                            <div class="ui left icon input">
+                            <input onChange={this.props.handleUser} type="text" placeholder="username"/>
+                                <i class="user icon"></i>
+                            </div>
+                            </div>
+                            <div class="field">
+                            <label>Password</label>
+                            <div class="ui left icon input">
+                            <input onChange={this.props.handlePassword} type="password"/>
+                                <i class="lock icon"></i>
+                            </div>
+                            </div>
+                            <div onClick={this.props.handleLogIn} class="ui red submit button">Login</div>
+                        </div>
+                        </div>
+                        <div class="middle aligned column">
+                        <div onClick={this.props.handleNewUserCreation} class="ui big button">
+                            <i  class="signup icon"></i>
+                            Sign Up
+                        </div>
+                        </div>
+                    </div>
+                    <div class="ui vertical divider">
+                        Or
+                    </div>
+                    </div>
+
+                {/* <div className="column" style={{
                         position: 'absolute',
                         top: 90,
                         left: 160}} >
@@ -41,7 +74,7 @@ export default class LoginPage extends React.Component{
                     <div>
                     <Button onClick={this.props.handleNewUserCreation}>Sign Up</Button>
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
          )
