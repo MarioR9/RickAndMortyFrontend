@@ -7,6 +7,7 @@ import Stage from './components/Stage'
 import NewUser from './components/NewUser';
 import OnlineMode from './components/OnlineMode'
 import EditUser from './components/EditUser'
+import MyMorty from './components/MyMorty';
 
 export default class App extends React.Component {
   
@@ -27,7 +28,7 @@ export default class App extends React.Component {
         age: 0,
         newMortyName: "",
         token: "",
-        newMorty: null
+        mortyPage: false
         }
       }
      
@@ -60,20 +61,20 @@ export default class App extends React.Component {
         password: e.currentTarget.value
       })
     }
-     handleAge=(e)=>{
+    handleAge=(e)=>{
       console.log(e.currentTarget.value)
       this.setState({
         age: e.currentTarget.value
       })  
     }
-     handleMortyName=(e)=>{
+    handleMortyName=(e)=>{
       console.log(e.currentTarget.value)
       this.setState({
         newMortyName: e.currentTarget.value
         })
-   }
+    }
    
-  handleLogIn=()=>{
+    handleLogIn=()=>{
     fetch('http://localhost:3000/login',{
       method: "POST",
       headers: {
@@ -104,21 +105,21 @@ export default class App extends React.Component {
             }
           })
       
-  }
+    }
 
-   handlePlayMode=()=>{
+    handlePlayMode=()=>{
      this.setState({
       stageMode: true,
       profilePage: false
      })
-   }
-   handleNewUserCreation=()=>{
+    }
+    handleNewUserCreation=()=>{
      this.setState({
       loginPage: false,
       newUserPage: true
      })
-   }
-   handleCurrentUser=(newRick)=>{
+    }
+    handleCurrentUser=(newRick)=>{
     //  debugger
      this.setState({
       currentRick: newRick.user,
@@ -128,23 +129,23 @@ export default class App extends React.Component {
   
      })
      localStorage.setItem("token", newRick.token)
-   }
-   handleProfileUser=(profileUser,profileMorties)=>{
+    }
+    handleProfileUser=(profileUser,profileMorties)=>{
      this.setState({
        currentRick: profileUser,
        currentMorties: profileMorties,
      })
-   }
-   handleProfileForEditedUser=(profileUser,profileMorties)=>{
+    }
+    handleProfileForEditedUser=(profileUser,profileMorties)=>{
     this.setState({
       currentRick: profileUser,
       currentMorties: profileMorties,
       editUser: false,
       profilePage: true
     })
-  }
+    }
   
-   handleLogOut=()=>{
+    handleLogOut=()=>{
      localStorage.clear()
      this.setState({
        profilePage: false,
@@ -153,27 +154,27 @@ export default class App extends React.Component {
 
      })
     }
-     handleBackToProfile=()=>{
+    handleBackToProfile=()=>{
       this.setState({
         stageMode: false,
         profilePage: true
  
       })
-     }
-     handleOnlineMode=()=>{
+    }
+    handleOnlineMode=()=>{
        this.setState({
         onlineMode: true,
         profilePage: false
        })
        localStorage.clear()
-     }
-     handleEditUser=()=>{
+    }
+    handleEditUser=()=>{
        this.setState({
         editUser: true,
         profilePage: false
        })
-     }
-     handleNewMorty=(morty)=>{
+    }
+    handleNewMorty=(morty)=>{
 
       console.log("clicked")
       fetch('http://localhost:3000/morties',{
@@ -199,9 +200,9 @@ export default class App extends React.Component {
                 })
               }
           })
-     }
+    }
 
-     handleRemoveMorty=(mortyID)=>{
+    handleRemoveMorty=(mortyID)=>{
       fetch(`http://localhost:3000/morties/${mortyID}`, {
         method: 'DELETE',
         headers: {
@@ -228,13 +229,19 @@ export default class App extends React.Component {
 
 
 
-     }
+    }
+    handleMortyPage=()=>{
+      this.setState({
+        profilePage:false,
+        mortyPage: true
+      })
+    }
    
    
    handlePage=()=>{
      if(this.state.profilePage === true ){
       
-       return <ProfilePage handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
+       return <ProfilePage handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
      }else if(this.state.stageMode === true){
 
        return <Stage handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty}rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
@@ -248,6 +255,9 @@ export default class App extends React.Component {
        return <OnlineMode/>
      }else if(this.state.editUser === true){
        return <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
+     }else if(this.state.moryPage === true){
+      return <MyMorty/>
+
      }
    }
 

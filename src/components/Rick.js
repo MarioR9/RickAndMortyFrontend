@@ -157,7 +157,7 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
                    <Card style={{
                     position: 'absolute',
                     top: 90,
-                    left: 170,
+                    left: 185,
                     width: 120}} raised image={
                     <Spritesheet 
                     style={{

@@ -4,6 +4,7 @@ import playButton from '../assets/PlayButton.png'
 import Spritesheet from 'react-responsive-spritesheet'
 
 
+
 import CowboyRickP from '../assets/Ricks/Profile/CowboyRick.png'
 import DoofusRickP from '../assets/Ricks/Profile/DoofusRick.png'
 import pickleRickP from '../assets/Ricks/Profile/pickleRick.png'
@@ -93,7 +94,14 @@ export default class ProfilePage extends React.Component{
 
         const {username,age} = this.props.rick
         return(
-            <div>
+            <div style={{
+                position: 'absolute',
+                top: '40px',
+                left: '0px',
+                // backgroundImage: `url(${s})`,
+                backgroundPosition: '0, 0',
+                width: '100%',
+                height: '100%',}}>
 
               
                <Card style={{
@@ -150,7 +158,7 @@ export default class ProfilePage extends React.Component{
                             left: 0,
                             width: 700}}
                         itemsPerRow={6}>
-                   {this.props.morties.map(morty => <Card raised image={
+                   {this.props.morties.map(morty => <Card onClick={this.props.handleMortyPage} raised image={
                     
                              <Spritesheet
                              style={{

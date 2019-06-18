@@ -1,7 +1,7 @@
 import React from 'react'
 import loingPageimg from '../assets/loginpage2.jpg'
 import login from '../assets/login.png'
-import icon05 from '../assets/icon05.png'
+import portalG from '../assets/Portal.gif'
 
 import { Input , Button ,Image, Icon } from 'semantic-ui-react'
 
@@ -76,8 +76,8 @@ export default class LoginPage extends React.Component{
             <div style={{
                 position: 'absolute',
                 top: '200px',
-                left: window.innerWidth / 2 - 75}}>
-                <Image onClick={this.handleDisplay} circular src={login} size='small' />
+                left: 800}}>
+                <Image onClick={this.handleDisplay} circular src={portalG} size='medium' />
             </div>
             {this.state.display === true ? this.handleModal() : null}
             </div>

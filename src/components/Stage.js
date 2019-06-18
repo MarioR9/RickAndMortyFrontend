@@ -2,7 +2,7 @@ import React from 'react'
 import Rick from './Rick'
 import map from '../assets/testMap.png'
 import Morty from './Morty'
-
+import galaxy from '../assets/rickandmortygalaxy.png'
 
 
 export default class Stage extends React.Component{
@@ -45,7 +45,7 @@ export default class Stage extends React.Component{
         
         return (
             
-            <div>
+            <div >
                
                 <div   onClick={this.handleMortyLocation} style={{
                     position: 'absolute',
