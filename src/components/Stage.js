@@ -41,17 +41,15 @@ export default class Stage extends React.Component{
             <div>
              
                 
-
-                <button onClick={this.props.handleBackToProfile} >profile</button>
         
                
                 <div  ref={this.myDiv}  onClick={this.handleMortyLocation} style={{
                     position: 'absolute',
                     top: '100px',
-                    left: '100px',
+                    left: '0px',
                     backgroundImage: `url(${map})`,
                     backgroundPosition: '0, 0',
-                    width: '85%',
+                    width: '100%',
                     height: '65%',}} >
                    
                 {<Rick rick={this.props.rick} morties={this.props.morties}/>}

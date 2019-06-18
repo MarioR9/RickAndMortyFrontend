@@ -1,17 +1,69 @@
 import React from 'react'
 import loingPageimg from '../assets/loginpage2.jpg'
-import icon03 from '../assets/icon03.png'
+import login from '../assets/login.png'
 import icon05 from '../assets/icon05.png'
 
-import { Input , Button ,Header,Image  } from 'semantic-ui-react'
+import { Input , Button ,Image, Icon } from 'semantic-ui-react'
 
 export default class LoginPage extends React.Component{
 
+    constructor(){
+        super()
+        this.state ={
+            display: false
+        }
+    }
+    
+    handleModal=()=>{
+     return(
+       
+         <div class="bg-modal" style={{display: 'flex'}}>
+            <div class="modal-contents">
+
+                <div  onClick={this.handleModalCLose}class="close">+</div>
+                <div className="column" style={{
+                        position: 'absolute',
+                        top: 90,
+                        left: 160}} >
+            
+                    <Input onChange={this.props.handleUser} type="text"/>
+                
+                    <br></br>
+                    
+                    <Input onChange={this.props.handlePassword} type="text"/>
+                    <br></br>
+                    <Button animated onClick={this.props.handleLogIn}>
+                        <Button.Content visible>Login</Button.Content>
+                        <Button.Content hidden>
+                            <Icon name='arrow right' />
+                        </Button.Content>
+                    </Button>
+                    <div>
+                    <Button onClick={this.props.handleNewUserCreation}>Sign Up</Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         )
+        
+    }
+    handleModalCLose=()=>{
+      this.setState({
+          display: false
+      })
+        
+    }
+    handleDisplay=()=>{
+        this.setState({
+            display: true
+        })
+    }
     
 
     render(){
     //    let t = this
     //    debugger
+
         return(
             <div style={{
                 position: 'absolute',
@@ -21,33 +73,15 @@ export default class LoginPage extends React.Component{
                 backgroundPosition: '0, 0',
                 width: '100%',
                 height: '100%',}}>
-            
-
-            <div className="ui middle aligned center aligned grid"
-                style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
-                
-                
-            <div className="column">
-            <Header as='h1' color='orange'>
-            <Image circular src={icon05} /> Username
-            </Header>
-                <Input onChange={this.props.handleUser} type="text"/>
-                <br></br>
-                <Header as='h1' color='orange'>
-            <Image circular src={icon03} /> Password
-            </Header>
-                <Input onChange={this.props.handlePassword} type="text"/>
-                <br></br>
-                <Button onClick={this.props.handleLogIn}>LonIN</Button>
-                <div>
-                <Button onClick={this.props.handleNewUserCreation}>Create an Account</Button>
-                </div>
+            <div style={{
+                position: 'absolute',
+                top: '200px',
+                left: window.innerWidth / 2 - 75}}>
+                <Image onClick={this.handleDisplay} circular src={login} size='small' />
             </div>
+            {this.state.display === true ? this.handleModal() : null}
             </div>
-        </div>
-           
         )
-    }
-}
+    } 
 
-// <Stage data={this.props.check} /> 
+}

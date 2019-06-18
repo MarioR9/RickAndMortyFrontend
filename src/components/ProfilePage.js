@@ -3,25 +3,31 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 import playButton from '../assets/PlayButton.png'
 import Spritesheet from 'react-responsive-spritesheet'
 
-import CowboyRick from '../assets/Ricks/Profile/CowboyRick.png'
-import DoofusRick from '../assets/Ricks/Profile/DoofusRick.png'
-import pickleRick from '../assets/Ricks/Profile/pickleRick.png'
-import SuperFanRick from '../assets/Ricks/Profile/SuperFanRick.png'
 
-import Beth from '../assets/Bed/profile/Beth.png'
-import GunkBeth from '../assets/Bed/profile/GunkBeth.png'
-import OriginalBeth from '../assets/Bed/profile/OriginalBeth.png'
-import WastelandBeth from '../assets/Bed/profile/WastelandBeth.png'
-
-import GunkJerry from '../assets/jerry/profile/GunkJerry.png'
-import Jerry from '../assets/jerry/profile/Jerry.png'
-import OriginalJerry from '../assets/jerry/profile/OriginalJerry.png'
-import WastelandJerry from '../assets/jerry/profile/WastelandJerry.png'
-
-import GunkSummer from '../assets/summer/profile/GunkSummer.png'
-import HawaiianSummer from '../assets/summer/profile/HawaiianSummer.png'
-import Summer from '../assets/summer/profile/Summer.png'
-import WastelandSummer from '../assets/summer/profile/WastelandSummer.png' 
+import CowboyRickP from '../assets/Ricks/Profile/CowboyRick.png'
+import DoofusRickP from '../assets/Ricks/Profile/DoofusRick.png'
+import pickleRickP from '../assets/Ricks/Profile/pickleRick.png'
+import SuperFanRickP from '../assets/Ricks/Profile/SuperFanRick.png'
+import WinnerRickP from '../assets/Ricks/Profile/WinnerRick.png'
+import VaporwaveRickP from '../assets/Ricks/Profile/VaporwaveRick.png'
+import RobotRickP from '../assets/Ricks/Profile/RobotRick.png'
+import RickP from '../assets/Ricks/Profile/Rick.png'
+import RickZarchezP from '../assets/Ricks/Profile/RickZarchez.png'
+import Rick800P from '../assets/Ricks/Profile/Rick800.png'
+import NinjaRickP from '../assets/Ricks/Profile/NinjaRick.png'
+import MysteriousRickP from '../assets/Ricks/Profile/MysteriousRick.png'
+import KarateRickP from '../assets/Ricks/Profile/KarateRick.png'
+import JohnRickP from '../assets/Ricks/Profile/JohnRick.png'
+import GuiltyRickP from '../assets/Ricks/Profile/GuiltyRick.png'
+import GreaserRickP from '../assets/Ricks/Profile/GreaserRick.png'
+import DudeRickP from '../assets/Ricks/Profile/DudeRick.png'
+import D99RickP from '../assets/Ricks/Profile/D99Rick.png'
+import ConstructionRickP from '../assets/Ricks/Profile/ConstructionRick.png'
+import CommanderRickP from '../assets/Ricks/Profile/CommanderRick.png'
+import ChairRickP from '../assets/Ricks/Profile/ChairRick.png'
+import BubbleGumRickP from '../assets/Ricks/Profile/BubbleGumRick.png'
+import AquaRickP from '../assets/Ricks/Profile/AquaRick.png'
+import AlienRick2ArmsP from '../assets/Ricks/Profile/AlienRick2Arms.png' 
 
 import DevilMorty from '../assets/Morties/walkingSprites/DevilMorty.png'
 import GreaserMorty from '../assets/Morties/walkingSprites/GreaserMorty.png'
@@ -71,10 +77,10 @@ export default class ProfilePage extends React.Component{
     render(){
         // let t = this
         // debugger
-        let characters = [CowboyRick,DoofusRick,pickleRick,SuperFanRick,
-            Beth,GunkBeth,OriginalBeth,WastelandBeth,
-            GunkJerry,Jerry,OriginalJerry,WastelandJerry,
-            GunkSummer,HawaiianSummer,Summer,WastelandSummer]
+        let charactersP = [CowboyRickP,DoofusRickP,pickleRickP,SuperFanRickP,
+            WinnerRickP,VaporwaveRickP,RobotRickP,RickP,RickZarchezP,Rick800P,NinjaRickP,
+            MysteriousRickP,KarateRickP,JohnRickP,GuiltyRickP,GreaserRickP,DudeRickP,D99RickP,
+            ConstructionRickP,CommanderRickP,ChairRickP,BubbleGumRickP,AquaRickP,AlienRick2ArmsP] 
         
         let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,
             TwoCatMorty,HoboMorty,RabbitMorty,TestX72Morty,SelfDefenseMorty,NoMercyMorty,
@@ -96,7 +102,7 @@ export default class ProfilePage extends React.Component{
                         left:  300,
                         }}>
 
-                    <Image src={characters[this.props.rick.avatar]} wrapped ui={false} />
+                    <Image src={charactersP[this.props.rick.avatar]} wrapped ui={false} />
                         <Card.Content>
                             <Card.Header>{username}<Icon onClick={this.props.handleEditUser} className="edit" /></Card.Header>
                                 <Card.Meta>
