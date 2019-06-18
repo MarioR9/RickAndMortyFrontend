@@ -26,7 +26,8 @@ export default class App extends React.Component {
         password: "",
         age: 0,
         newMortyName: "",
-        token: ""
+        token: "",
+        newMorty: null
         }
       }
      
@@ -126,6 +127,7 @@ export default class App extends React.Component {
       profilePage: true,
   
      })
+     localStorage.setItem("token", newRick.token)
    }
    handleProfileUser=(profileUser,profileMorties)=>{
      this.setState({
@@ -171,6 +173,62 @@ export default class App extends React.Component {
         profilePage: false
        })
      }
+     handleNewMorty=(morty)=>{
+
+      console.log("clicked")
+      fetch('http://localhost:3000/morties',{
+        method: "POST",
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            morty: morty,
+            rickID: this.state.currentRick.id
+            })
+          })
+            .then(resp=>resp.json())
+            .then(data=>{
+              if(data.message){
+                alert(data.message)
+              }else{
+                this.setState({
+                  currentRick: data.user,
+                  currentMorties: data.morties,
+                 
+                })
+              }
+          })
+     }
+
+     handleRemoveMorty=(mortyID)=>{
+      fetch(`http://localhost:3000/morties/${mortyID}`, {
+        method: 'DELETE',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          mortyId: mortyID,
+          rickID: this.state.currentRick.id
+          })
+         })
+      .then(resp => resp.json())
+      .then(data=>{
+          console.log("morty removed")
+          this.setState({
+            currentRick: data.user,
+            currentMorties: data.morties,
+           
+          })
+        
+    })
+
+
+
+
+
+     }
    
    
    handlePage=()=>{
@@ -179,7 +237,7 @@ export default class App extends React.Component {
        return <ProfilePage handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
      }else if(this.state.stageMode === true){
 
-       return <Stage rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
+       return <Stage handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty}rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
      }else if(this.state.loginPage === true){
 
        return <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>

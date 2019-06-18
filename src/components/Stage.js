@@ -9,9 +9,12 @@ export default class Stage extends React.Component{
         constructor(){
             super()
             this.state ={
-                mortyLocationy: Math.floor(Math.random() * Math.floor(1550)),
-                mortyLocationx: Math.floor(Math.random() * Math.floor(300)),
+                mortyLocationx: Math.floor(Math.random() * Math.floor(1550)),
+                mortyLocationy: Math.floor(Math.random() * Math.floor(300)),
                 currentMorty: 0,
+                mortyoffsetx: 0,
+                mortyoffsety: 0,
+                currentMortyToCatch: <Morty/>
             }
 
             this.myDiv = React.createRef()
@@ -25,25 +28,26 @@ export default class Stage extends React.Component{
 
 
         handleMortyLocation=()=>{
+            let x = Math.floor(Math.random() * Math.floor(1550))
+            let y = Math.floor(Math.random() * Math.floor(300))
             this.setState({
-                mortyLocationy: Math.floor(Math.random() * Math.floor(1550)),
-                mortyLocationx: Math.floor(Math.random() * Math.floor(300)),
-                currentMorty: Math.floor(Math.random() * Math.floor(23))
+                mortyLocationy: Math.ceil(x/5)*5,
+                mortyLocationx: Math.ceil(y/5)*5,
+                currentMorty: Math.floor(Math.random() * Math.floor(23)),
+                mortyoffsetx: this.myDiv.current.offsetWidth,
+                mortyoffsety: this.myDiv.current.offsetHeight
             })
         }
 
-       
+
       
     render() {
         
         return (
             
             <div>
-             
-                
-        
                
-                <div  ref={this.myDiv}  onClick={this.handleMortyLocation} style={{
+                <div   onClick={this.handleMortyLocation} style={{
                     position: 'absolute',
                     top: '100px',
                     left: '0px',
@@ -52,12 +56,12 @@ export default class Stage extends React.Component{
                     width: '100%',
                     height: '65%',}} >
                    
-                {<Rick rick={this.props.rick} morties={this.props.morties}/>}
-                <div  onClick={this.handleLocations} className="morty" style={{
+                {<Rick handleRemoveMorty={this.props.handleRemoveMorty} newMorty={this.props.newMorty} handleNewMorty={this.props.handleNewMorty} currentMorty={this.state.currentMorty} mortyoffsetx={this.state.mortyoffsetx} mortyoffsety={this.state.mortyoffsety} mortyx={this.state.mortyLocationx} mortyy={this.state.mortyLocationy} rick={this.props.rick} morties={this.props.morties}/>}
+                <div  ref={this.myDiv} onClick={this.handleLocations} className="morty" style={{
                     position: 'relative',
                     top: this.state.mortyLocationx,
                     left: this.state.mortyLocationy,
-                    width: 60
+                    width: 65
                     }} >
                     <Morty currentMorty={this.state.currentMorty}/>
                 </div>

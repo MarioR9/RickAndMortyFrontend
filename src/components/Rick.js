@@ -1,7 +1,6 @@
 import React from 'react'
 import Spritesheet from 'react-responsive-spritesheet'
-import { Card } from 'semantic-ui-react'
-
+import { Card,Button } from 'semantic-ui-react'
 
 import CowboyRick from '../assets/Ricks/walkingSprites/CowboyRick.png'
 import DoofusRick from '../assets/Ricks/walkingSprites/DoofusRick.png'
@@ -64,21 +63,127 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
     HipsterMorty,RedShirtMorty,ExoAlphaMorty,PeaceMorty,SpookyGMorty,StrayCatMorty,SkeletonMorty,
     AquaMorty,FlamingMorty,FrozenMorty,PunkMorty,BananaMorty]
 
-export default class Rick extends React.Component{
-    constructor(){
-        super()
-        this.state={
-            movex: 0,
-            movey: 0
+    
+//this.props.newMorty  currently tracking NewMorty
+
+//this.props.currentMorty == morty iD
+//this.props.rick.id 
+
+    export default class Rick extends React.Component{
+        constructor(){
+            super()
+            this.state={
+                movey: 0,
+                movex: 0
+            }
         }
-    }
-    componentDidMount=()=>{
-        document.addEventListener('keydown', this.rickMovement)
-        
+        componentDidMount=()=>{
+            document.addEventListener('keydown', this.rickMovement)
+            this.setState({
+                mortyx: this.props.mortyx,
+                mortyy: this.props.mortyy
+                
+            })
+            
+        }
+        handleCollision=()=>{
+            let MortyLocations= [
+                //bottom approach
+                [this.props.mortyx, this.props.mortyy]
+                ,[this.props.mortyx, this.props.mortyy - 5]
+                ,[this.props.mortyx, this.props.mortyy - 10]
+                ,[this.props.mortyx, this.props.mortyy - 15]
+                ,[this.props.mortyx, this.props.mortyy - 20]
+                ,[this.props.mortyx, this.props.mortyy - 25]
+
+                ,[this.props.mortyx, this.props.mortyy]
+                ,[this.props.mortyx, this.props.mortyy + 5]
+                ,[this.props.mortyx, this.props.mortyy + 10]
+                ,[this.props.mortyx, this.props.mortyy + 15]
+                ,[this.props.mortyx, this.props.mortyy + 20]
+                ,[this.props.mortyx, this.props.mortyy + 25]
+                //top approach
+                ,[this.props.mortyx, this.props.mortyy]
+                ,[this.props.mortyx + 5, this.props.mortyy ]
+                ,[this.props.mortyx + 10, this.props.mortyy ]
+                ,[this.props.mortyx + 15, this.props.mortyy ]
+                ,[this.props.mortyx + 20, this.props.mortyy ]
+                ,[this.props.mortyx + 25, this.props.mortyy ]
+                ,[this.props.mortyx + 30, this.props.mortyy ]
+                ,[this.props.mortyx + 25, this.props.mortyy ]
+                
+                ,[this.props.mortyx, this.props.mortyy]
+                ,[this.props.mortyx - 5, this.props.mortyy ]
+                ,[this.props.mortyx - 10, this.props.mortyy ]
+                ,[this.props.mortyx - 15, this.props.mortyy ]
+                ,[this.props.mortyx - 20, this.props.mortyy ]
+                ,[this.props.mortyx - 25, this.props.mortyy ]
+                ,[this.props.mortyx - 30, this.props.mortyy ]
+                ,[this.props.mortyx - 25, this.props.mortyy ]
+                
+                
+                ,[this.props.mortyx , this.props.mortyy]
+                ,[this.props.mortyx + 5 , this.props.mortyy + 5]
+                ,[this.props.mortyx + 10 , this.props.mortyy + 10]
+                ,[this.props.mortyx + 15, this.props.mortyy + 15]
+                ,[this.props.mortyx + 20, this.props.mortyy + 20]
+                ,[this.props.mortyx + 25 , this.props.mortyy + 25]
+           
+                ,[this.props.mortyx , this.props.mortyy]
+                ,[this.props.mortyx - 5 , this.props.mortyy - 5]
+                ,[this.props.mortyx - 10 , this.props.mortyy - 10]
+                ,[this.props.mortyx - 15, this.props.mortyy - 15]
+                ,[this.props.mortyx - 20, this.props.mortyy - 20]
+                ,[this.props.mortyx - 25 , this.props.mortyy - 25]
+               
+              
+                
+            
+       
+                                ]
+        //   console.log(MortyLocations)                      
+        let rickLocation = [[this.state.movey , this.state.movex]]                      
+        //  console.log(rickLocation)                   
+            if(MortyLocations.find(loc => loc.includes(rickLocation[0][0]) && loc.includes(rickLocation[0][1]))){
+            console.log("Collision!")
+            // debugger
+            return(
+       
+                <div class="bg-modal" style={{display: 'flex'}}>
+                   <div class="modal-contents">
+                   <Button onClick={()=>{this.props.handleNewMorty(this.props.currentMorty)}}>Catch</Button>
+                    <Button>Kill_</Button>  
+
+                   <Card style={{
+                    position: 'absolute',
+                    top: 90,
+                    left: 170,
+                    width: 120}} raised image={
+                    <Spritesheet 
+                    style={{
+                    backgroundColor: "black"}}
+                    className={`my-element__class--style`}
+                    image={Morties[this.props.currentMorty]}
+                    widthFrame={128}
+                    heightFrame={159}
+                    steps={4}
+                    fps={6}
+                    autoplay={true}
+                    loop={true}
+                        />  } />
+                       
+                    
+                          
+                      
+                   </div>
+               </div>
+                )
+        }
     }
     
     rickMovement=(event)=>{
-       console.log(event.key)
+   
+        this.handleCollision()
         if(event.key === "d"){
         this.setState({
             movex: this.state.movex + 5
@@ -102,13 +207,14 @@ export default class Rick extends React.Component{
 // let t = this
 // debugger
         return(
-    <fragment>  
+    <div>
+        {this.handleCollision()}
         <div>
         <div style={{
             position: 'absolute',
             top:   this.state.movey,
             left:  this.state.movex,
-            width: '90px'
+            width: '80px'
                 
             }}> 
             {this.props.rick.username} 😎
@@ -132,10 +238,10 @@ export default class Rick extends React.Component{
                     position: 'absolute',
                     top: 600,
                     left: 20,
-                    width: 800}}
-                itemsPerRow={6}>
+                    width: 1200}}
+                itemsPerRow={10}>
                    {this.props.morties.map(morty => 
-                   <Card raised image={
+                   <Card onClick={()=>{this.props.handleRemoveMorty(morty.morty)}} raised image={
                     <Spritesheet 
                     style={{
                     backgroundColor: "#b33cf5"}}
@@ -158,8 +264,8 @@ export default class Rick extends React.Component{
                                                              
                      />)}
                 </Card.Group>
+            </div>
          </div>
-            </fragment>
 
         )
     }

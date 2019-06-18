@@ -56,15 +56,3 @@ export default class Morty extends React.Component{
     }
 }
 
-// <div style={{
-//     position: 'absolute',
-//     top:   520,
-//     left:  0,
-//         backgroundColor: "black",
-//         // backgroundImage: `url(https://images.template.net/wp-content/uploads/2015/08/Dark-Backgrounds.png)`,
-//         backgroundPosition: '0, 0',
-//         width: '100%',
-//         height: '20%',}}>
-
-
-// </div>
