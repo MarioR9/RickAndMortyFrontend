@@ -257,7 +257,7 @@ export default class NewUser extends React.Component{
        
         return(
             <div>
-            <fragment>
+            <Fragment>
                 <div>
                 <h1 style={{
                         position: 'relative',
@@ -393,7 +393,7 @@ export default class NewUser extends React.Component{
                   
                     </Card.Content>
                 </Card>  
-        </fragment>    
+        </Fragment>    
          </div>
         )
     }

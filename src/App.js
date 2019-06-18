@@ -196,7 +196,11 @@ export default class App extends React.Component {
   render(){
     return (
       <div>
-      <button onClick={this.handleLogOut} >LogOut</button>
+      <div class="ui inverted menu">
+      <a class="active red item" onClick={this.handleLogOut} >LogOut</a>
+      <a class="active purple item" onClick={this.handleBackToProfile} >Profile</a>
+    </div>
+      
           {this.handlePage()}
        
       </div>
