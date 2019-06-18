@@ -2,48 +2,55 @@ import React, { Fragment } from 'react'
 import { Card, Input ,Container ,Image } from 'semantic-ui-react'
 import Spritesheet from 'react-responsive-spritesheet'
 
-
-
 import CowboyRickP from '../assets/Ricks/Profile/CowboyRick.png'
 import DoofusRickP from '../assets/Ricks/Profile/DoofusRick.png'
 import pickleRickP from '../assets/Ricks/Profile/pickleRick.png'
 import SuperFanRickP from '../assets/Ricks/Profile/SuperFanRick.png'
-
-import BethP from '../assets/Bed/profile/Beth.png'
-import GunkBethP from '../assets/Bed/profile/GunkBeth.png'
-import OriginalBethP from '../assets/Bed/profile/OriginalBeth.png'
-import WastelandBethP from '../assets/Bed/profile/WastelandBeth.png'
-
-import GunkJerryP from '../assets/jerry/profile/GunkJerry.png'
-import JerryP from '../assets/jerry/profile/Jerry.png'
-import OriginalJerryP from '../assets/jerry/profile/OriginalJerry.png'
-import WastelandJerryP from '../assets/jerry/profile/WastelandJerry.png'
-
-import GunkSummerP from '../assets/summer/profile/GunkSummer.png'
-import HawaiianSummerP from '../assets/summer/profile/HawaiianSummer.png'
-import SummerP from '../assets/summer/profile/Summer.png'
-import WastelandSummerP from '../assets/summer/profile/WastelandSummer.png' 
-
+import WinnerRickP from '../assets/Ricks/Profile/WinnerRick.png'
+import VaporwaveRickP from '../assets/Ricks/Profile/VaporwaveRick.png'
+import RobotRickP from '../assets/Ricks/Profile/RobotRick.png'
+import RickP from '../assets/Ricks/Profile/Rick.png'
+import RickZarchezP from '../assets/Ricks/Profile/RickZarchez.png'
+import Rick800P from '../assets/Ricks/Profile/Rick800.png'
+import NinjaRickP from '../assets/Ricks/Profile/NinjaRick.png'
+import MysteriousRickP from '../assets/Ricks/Profile/MysteriousRick.png'
+import KarateRickP from '../assets/Ricks/Profile/KarateRick.png'
+import JohnRickP from '../assets/Ricks/Profile/JohnRick.png'
+import GuiltyRickP from '../assets/Ricks/Profile/GuiltyRick.png'
+import GreaserRickP from '../assets/Ricks/Profile/GreaserRick.png'
+import DudeRickP from '../assets/Ricks/Profile/DudeRick.png'
+import D99RickP from '../assets/Ricks/Profile/D99Rick.png'
+import ConstructionRickP from '../assets/Ricks/Profile/ConstructionRick.png'
+import CommanderRickP from '../assets/Ricks/Profile/CommanderRick.png'
+import ChairRickP from '../assets/Ricks/Profile/ChairRick.png'
+import BubbleGumRickP from '../assets/Ricks/Profile/BubbleGumRick.png'
+import AquaRickP from '../assets/Ricks/Profile/AquaRick.png'
+import AlienRick2ArmsP from '../assets/Ricks/Profile/AlienRick2Arms.png'
 
 import CowboyRick from '../assets/Ricks/walkingSprites/CowboyRick.png'
 import DoofusRick from '../assets/Ricks/walkingSprites/DoofusRick.png'
 import pickleRick from '../assets/Ricks/walkingSprites/pickleRick.png'
 import SuperFanRick from '../assets/Ricks/walkingSprites/SuperFanRick.png'
-
-import Beth from '../assets/Bed/sprites/Beth.png'
-import GunkBeth from '../assets/Bed/sprites/GunkBeth.png'
-import OriginalBeth from '../assets/Bed/sprites/OriginalBeth.png'
-import WastelandBeth from '../assets/Bed/sprites/WastelandBeth.png'
-
-import GunkJerry from '../assets/jerry/sprites/GunkJerry.png'
-import Jerry from '../assets/jerry/sprites/Jerry.png'
-import OriginalJerry from '../assets/jerry/sprites/OriginalJerry.png'
-import WastelandJerry from '../assets/jerry/sprites/WastelandJerry.png'
-
-import GunkSummer from '../assets/summer/sprites/GunkSummer.png'
-import HawaiianSummer from '../assets/summer/sprites/HawaiianSummer.png'
-import Summer from '../assets/summer/sprites/Summer.png'
-import WastelandSummer from '../assets/summer/sprites/WastelandSummer.png' 
+import WinnerRick from '../assets/Ricks/walkingSprites/WinnerRick.png'
+import VaporwaveRick from '../assets/Ricks/walkingSprites/VaporwaveRick.png'
+import RobotRick from '../assets/Ricks/walkingSprites/RobotRick.png'
+import Rick from '../assets/Ricks/walkingSprites/Rick.png'
+import RickZarchez from '../assets/Ricks/walkingSprites/RickZarchez.png'
+import Rick800 from '../assets/Ricks/walkingSprites/Rick800.png'
+import NinjaRick from '../assets/Ricks/walkingSprites/NinjaRick.png'
+import MysteriousRick from '../assets/Ricks/walkingSprites/MysteriousRick.png'
+import KarateRick from '../assets/Ricks/walkingSprites/KarateRick.png'
+import JohnRick from '../assets/Ricks/walkingSprites/JohnRick.png'
+import GuiltyRick from '../assets/Ricks/walkingSprites/GuiltyRick.png'
+import GreaserRick from '../assets/Ricks/walkingSprites/GreaserRick.png'
+import DudeRick from '../assets/Ricks/walkingSprites/DudeRick.png'
+import D99Rick from '../assets/Ricks/walkingSprites/D99Rick.png'
+import ConstructionRick from '../assets/Ricks/walkingSprites/ConstructionRick.png'
+import CommanderRick from '../assets/Ricks/walkingSprites/CommanderRick.png'
+import ChairRick from '../assets/Ricks/walkingSprites/ChairRick.png'
+import BubbleGumRick from '../assets/Ricks/walkingSprites/BubbleGumRick.png'
+import AquaRick from '../assets/Ricks/walkingSprites/AquaRick.png'
+import AlienRick2Arms from '../assets/Ricks/walkingSprites/AlienRick2Arms.png'
 
 import DevilMorty from '../assets/Morties/walkingSprites/DevilMorty.png'
 import GreaserMorty from '../assets/Morties/walkingSprites/GreaserMorty.png'
@@ -71,14 +78,14 @@ import PunkMorty from '../assets/Morties/walkingSprites/PunkMorty.png'
 import BananaMorty from '../assets/Morties/walkingSprites/BananaMorty.png'
 
 let characters = [CowboyRick,DoofusRick,pickleRick,SuperFanRick,
-    Beth,GunkBeth,OriginalBeth,WastelandBeth,
-    GunkJerry,Jerry,OriginalJerry,WastelandJerry,
-    GunkSummer,HawaiianSummer,Summer,WastelandSummer]
+    WinnerRick,VaporwaveRick,RobotRick,Rick,RickZarchez,Rick800,NinjaRick,
+    MysteriousRick,KarateRick,JohnRick,GuiltyRick,GreaserRick,DudeRick,D99Rick,
+    ConstructionRick,CommanderRick,ChairRick,BubbleGumRick,AquaRick,AlienRick2Arms] 
 
-    let charactersP = [CowboyRickP,DoofusRickP,pickleRickP,SuperFanRickP,
-        BethP,GunkBethP,OriginalBethP,WastelandBethP,
-        GunkJerryP,JerryP,OriginalJerryP,WastelandJerryP,
-        GunkSummerP,HawaiianSummerP,SummerP,WastelandSummerP]    
+let charactersP = [CowboyRickP,DoofusRickP,pickleRickP,SuperFanRickP,
+    WinnerRickP,VaporwaveRickP,RobotRickP,RickP,RickZarchezP,Rick800P,NinjaRickP,
+    MysteriousRickP,KarateRickP,JohnRickP,GuiltyRickP,GreaserRickP,DudeRickP,D99RickP,
+    ConstructionRickP,CommanderRickP,ChairRickP,BubbleGumRickP,AquaRickP,AlienRick2ArmsP]    
 
 let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatMorty,HoboMorty,RabbitMorty,TestX72Morty,SelfDefenseMorty,NoMercyMorty,MustacheMorty,BeardMorty,HipsterMorty,RedShirtMorty,ExoAlphaMorty,PeaceMorty,SpookyGMorty,StrayCatMorty,SkeletonMorty,AquaMorty,FlamingMorty,FrozenMorty,PunkMorty,BananaMorty]
 
