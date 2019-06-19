@@ -64,6 +64,8 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
     HipsterMorty,RedShirtMorty,ExoAlphaMorty,PeaceMorty,SpookyGMorty,StrayCatMorty,SkeletonMorty,
     AquaMorty,FlamingMorty,FrozenMorty,PunkMorty,BananaMorty]
 
+    let Names = ['Devil Morty','Greaser Morty','SuperRick FanMorty','The One True Morty','Two Cat Morty','Hobo Morty','Rabbit Morty','Test X72 Morty','Self Defense Morty','No Mercy Morty','Mustache Morty','Beard Morty','Hipster Morty','Red Shirt Morty','Exo Alpha Morty','Peace Morty','Spooky Morty','Stray Cat Morty','Skeleton Morty','Aqua Morty','Flaming Morty','Frozen Morty','Punk Morty','Banana Morty']
+
 
     
 
@@ -159,10 +161,10 @@ export default class Rick extends React.Component{
 
                    <Card style={{
                     position: 'absolute',
-                    top: 90,
+                    top: 70,
                     left: 185,
-                    width: 120}} raised image={
-                    <Spritesheet 
+                    width: 120}} >
+                        <Spritesheet 
                     style={{
                     backgroundColor: "black"}}
                     className={`my-element__class--style`}
@@ -173,7 +175,13 @@ export default class Rick extends React.Component{
                     fps={6}
                     autoplay={true}
                     loop={true}
-                        />  } />
+                        />  
+                        
+                        <Label as='a' basic color='red' pointing>
+                        {Names[this.props.currentMorty]}
+                        
+                    </Label>
+                        </Card>
                        
                     
                           
@@ -249,7 +257,7 @@ export default class Rick extends React.Component{
                     width: 1200}}
                 itemsPerRow={10}>
                    {this.props.morties.map(morty => 
-                   <Card onClick={()=>{this.props.handleRemoveMorty(morty.morty)}} raised image={
+                   <Card onClick={()=>{this.props.handleRemoveMorty(morty.id)}} >
                     <Spritesheet 
                     style={{
                     backgroundColor: "#b33cf5"}}
@@ -266,11 +274,13 @@ export default class Rick extends React.Component{
                       }}
                       onMouseLeave={spritesheet => {
                         spritesheet.pause();
-                      }}
-                    />       
-                       }               
-                                                             
-                     />)}
+                      }}/>
+
+                        <Label as='a' basic color='purple' pointing>
+                        {Names[morty.morty]}
+                        </Label>
+                         
+                     </Card>)}
                 </Card.Group>
             </div>
          </div>

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Card, Icon, Image,Form, Radio } from 'semantic-ui-react'
+import { Card, Icon, Image,Form, Radio , Label} from 'semantic-ui-react'
 import playButton from '../assets/PlayButton.png'
 import Spritesheet from 'react-responsive-spritesheet'
-
+// import rickandmortyred from '../assets/rickandmortyred.jpg'
 
 
 import CowboyRickP from '../assets/Ricks/Profile/CowboyRick.png'
@@ -58,9 +58,6 @@ import BananaMorty from '../assets/Morties/walkingSprites/BananaMorty.png'
 export default class ProfilePage extends React.Component{
     
     
-    
-
-    
     componentDidMount(){
         //check localStorage has a token
         let token = localStorage.getItem("token")
@@ -91,7 +88,8 @@ export default class ProfilePage extends React.Component{
             MustacheMorty,BeardMorty,HipsterMorty,RedShirtMorty,ExoAlphaMorty,PeaceMorty,
             SpookyGMorty,StrayCatMorty,SkeletonMorty,AquaMorty,FlamingMorty,FrozenMorty,
             PunkMorty,BananaMorty]
-        
+        let Names = ['Devil Morty','Greaser Morty','SuperRick FanMorty','The One True Morty','Two Cat Morty','Hobo Morty','Rabbit Morty','Test X72 Morty','Self Defense Morty','No Mercy Morty','Mustache Morty','Beard Morty','Hipster Morty','Red Shirt Morty','Exo Alpha Morty','Peace Morty','Spooky Morty','Stray Cat Morty','Skeleton Morty','Aqua Morty','Flaming Morty','Frozen Morty','Punk Morty','Banana Morty']
+      
 
 
 
@@ -101,7 +99,7 @@ export default class ProfilePage extends React.Component{
                 position: 'absolute',
                 top: '40px',
                 left: '0px',
-                // backgroundImage: `url(${s})`,
+                // backgroundImage: `url(${rickandmortyred})`,
                 backgroundPosition: '0, 0',
                 width: '100%',
                 height: '100%',}}>
@@ -180,32 +178,46 @@ export default class ProfilePage extends React.Component{
                             top: 90,
                             left: 700}}>
                         <h1>My Morties</h1>
+                        
                 <Card.Group 
+                
                         style={{
                             position: 'absolute',
                             top: 40,
                             left: 0,
                             width: 700}}
                         itemsPerRow={6}>
-                   {this.props.morties.map(morty => <Card id={morty.morty} onClick={this.props.handleMortyPage} raised image={
-                    
-                             <Spritesheet
-                             style={{
-                                backgroundColor: "#f94b17"}}
-                             className={`my-element__class--style`}
-                             image={Morties[morty.morty]}
-                             widthFrame={128}
-                             heightFrame={159}
-                             steps={4}
-                             fps={5}
-                             autoplay={true}
-                             loop={true}
-                             />}
-                     />)}
+                             
+                   {this.props.morties.map(morty => <Card id={morty.id} onClick={this.props.handleMortyPage} 
+                    > <Spritesheet
+                     style={{
+                        backgroundColor: "#f94b17"}}
+                     className={`my-element__class--style`}
+                     image={Morties[morty.morty]}
+                     widthFrame={128}
+                     heightFrame={159}
+                     steps={4}
+                     fps={5}
+                     autoplay={true}
+                     loop={true}
+                     /> 
+                     <Label as='a' basic color='red' pointing>
+                        {Names[morty.morty]}
+                        </Label>
+                        <Label as='a' basic color='blue'>
+                        Level: {morty.level}
+                    </Label>
+                     
+                     
+                     </Card>)}
+                   
                 </Card.Group>
+                
                 </div>
 
             </div>
         )
     }
 }
+
+

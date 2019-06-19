@@ -1,11 +1,12 @@
 import React from 'react'
 import Rick from './Rick'
-import map from '../assets/testMap.png'
+// import map from '../assets/testMap.png'
 import Morty from './Morty'
-
-
-let x = Math.floor(Math.random() * Math.floor(window.innerWidth-600))
-let y = Math.floor(Math.random() * Math.floor(window.innerHeight-700))
+import rickandmortyred from '../assets/rickandmortyred.jpg'
+import map2 from '../assets/alien_planet_png_27989.png'
+// import map3 from '../assets/planet.jpg'
+let x = Math.floor(Math.random() * Math.floor(600))
+let y = Math.floor(Math.random() * Math.floor(200))
 export default class Stage extends React.Component{
         constructor(){
             super()
@@ -31,8 +32,8 @@ export default class Stage extends React.Component{
 
 
         handleMortyLocation=()=>{
-            let x = Math.floor(Math.random() * Math.floor(1550))
-            let y = Math.floor(Math.random() * Math.floor(300))
+            let x = Math.floor(Math.random() * Math.floor(600))
+            let y = Math.floor(Math.random() * Math.floor(200))
             this.setState({
                 mortyLocationy: Math.ceil(x/5)*5,
                 mortyLocationx: Math.ceil(y/5)*5,
@@ -48,13 +49,20 @@ export default class Stage extends React.Component{
         
         return (
             
-            <div >
+            <div style={{
+                position: 'absolute',
+                top: '40px',
+                left: '0px',
+                backgroundImage: `url(${rickandmortyred})`,
+                backgroundPosition: '0, 0',
+                width: '100%',
+                height: '100%',}}>
 
                 <div style={{
                     position: 'absolute',
                     top: '100px',
                     left: '100px',
-                    backgroundImage: `url(${map})`,
+                    backgroundImage: `url(${map2})`,
                     backgroundPosition: '0, 0',
                     width: '87%',
                     height: '80%',}} >

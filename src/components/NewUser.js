@@ -143,7 +143,7 @@ export default class NewUser extends React.Component{
         let char = characters[selected]
             this.setState({
                 currentRick: <Spritesheet style={{
-                    backgroundColor: "#dadbde"}}
+                    backgroundColor: "#f81115"}}
                 className={`my-element__class--style`}
                 key={selected} 
                 image={char}
@@ -165,7 +165,7 @@ export default class NewUser extends React.Component{
         let char = Morties[selected]
             this.setState({
                 currentMorty: <Spritesheet style={{
-                    backgroundColor: "#dadbde"}}
+                    backgroundColor: "#f81115"}}
                 key={selected}
                 className={`my-element__class--style`}
                 image={char}
@@ -188,7 +188,7 @@ export default class NewUser extends React.Component{
         
         this.setState({
             currentRick: <Spritesheet style={{
-                backgroundColor: "#dadbde"}}
+                backgroundColor: "#24bf04"}}
             className={`my-element__class--style`}
             image={ricks}
             widthFrame={130}
@@ -202,7 +202,7 @@ export default class NewUser extends React.Component{
             RickId: characters.indexOf(ricks),
             currentPlayerAvatar: charactersP[characters.indexOf(ricks)],
             currentMorty: <Spritesheet style={{
-                backgroundColor: "#dadbde"}}
+                backgroundColor: "#24bf04"}}
             className={`my-element__class--style`}
             image={morty}
             widthFrame={130}
@@ -276,7 +276,7 @@ export default class NewUser extends React.Component{
             {characters.map((rick,index) =>  
              <Card  className="target-selected" onClick={this.handleRickSelection} id={index} key={index} raised image={
             <Spritesheet style={{
-                        backgroundColor: "#dadbde"}}
+                        backgroundColor: ""}}
                     className={`my-element__class--style`}
                     image={rick}
                     widthFrame={130}
@@ -312,7 +312,7 @@ export default class NewUser extends React.Component{
             {Morties.map((morty,index)=>  
             <Card className="target-selected" key={`morty${index}`} onClick={this.handleMortySelection} id={index} raised image={
             <Spritesheet  style={{
-                        backgroundColor: "#dadbde"}}
+                        backgroundColor: ""}}
                     className={`my-element__class--style`}
                     image={morty}
                     widthFrame={130}
@@ -354,9 +354,9 @@ export default class NewUser extends React.Component{
                         }}
                     itemsPerRow={6}>
             
-            <Card id="target-selected"
+            <Card 
                  raised image={this.state.currentRick}/>
-            <Card id="target-selected"
+            <Card 
                  raised image={this.state.currentMorty}/>
 
                 <button onClick={this.handleRandomSelection}>Random</button>
@@ -384,7 +384,7 @@ export default class NewUser extends React.Component{
             <Card style={{
                         position: 'absolute',
                         top:   420,
-                        left:  900,
+                        left:  900
                         }}>
 
                     <Image src={this.state.currentPlayerAvatar} wrapped ui={false} />

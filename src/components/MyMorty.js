@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Icon, Image, Progress, Button } from 'semantic-ui-react'
-
+// import alone from '../assets/alone.png'
 import AquaMorty from '../assets/Morties/profile/AquaMorty.png'
 import BananaMorty from '../assets/Morties/profile/BananaMorty.png'
 import BeardMorty from '../assets/Morties/profile/BeardMorty.png'
@@ -35,32 +35,117 @@ export default class MyMorty extends React.Component{
       super()
      
       this.state={
-        food: 1,
-        health: 1,
-        level: 0
+        food: null,
+        health: null,
+        level: null
       }
     }
 
     componentDidMount=()=>{
       this.setState({
-        food: this.props.morties.filter(morty => morty.morty === parseInt(this.props.currentCardMorty))[0].food,
-        health: this.props.morties.filter(morty => morty.morty === parseInt(this.props.currentCardMorty))[0].health,
-        level: this.props.morties.filter(morty => morty.morty === parseInt(this.props.currentCardMorty))[0].level
-        
+        food: this.props.morties.filter(morty => morty.id === parseInt(this.props.currentCardMorty))[0].food,
+        health: this.props.morties.filter(morty => morty.id === parseInt(this.props.currentCardMorty))[0].health,
+        level: this.props.morties.filter(morty => morty.id === parseInt(this.props.currentCardMorty))[0].level,
       })
+      
     }
+    handleStatsFood=(e)=>{
+      console.log(e)
+      // debugger
+      if(this.state.food >= 100 && this.state.health >= 100){
+        this.handleStatsLevel()
+      }else if(this.state.food >= 100){
+        alert("Too much Food")
+      }else{
+       fetch(`http://localhost:3000/morties/${this.props.currentCardMorty}`,{
+          method: "PATCH",
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              rickID: this.props.currentRick.id,
+              mortyId: parseInt(this.props.currentCardMorty),
+              food: this.state.food + 5,
+              health: this.state.health,
+              level: this.state.level 
+          //   MortyId: this.state.MortyId //hard code morty		
+        })
+      })
+      .then(resp=>resp.json())
+      .then(player=>{
+        // debugger
+         this.setState({
+           food: player.morties.food
+          })
+        })
+      }
+      }
 
-    handleFoodLvL=()=>{
-      this.setState({
-        food: this.state.food + 5
-      })
-    }
-    handleHealth=()=>{
-      this.setState({
-        health: this.state.health + 15
-      })
-    }
+
+      handleStatsHealth=()=>{
+        if(this.state.health >= 100 && this.state.food >= 100){
+          this.handleStatsLevel()
+        }else if(this.state.health >= 100){
+          alert("Full Health")
+
+        }
+        fetch(`http://localhost:3000/morties/${this.props.currentCardMorty}`,{
+            method: "PATCH",
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rickID: this.props.currentRick.id,
+                mortyId: parseInt(this.props.currentCardMorty),
+                food: this.state.food,
+                health: this.state.health + 5,
+                level: this.state.level
+            //   MortyId: this.state.MortyId //hard code morty		
+            })
+          })
+          .then(resp=>resp.json())
+          .then(player=>{
+            this.setState({
+              health: player.morties.health
+            })
+          })
+         }
+        
+
+
+        handleStatsLevel=(e)=>{
+          let newFood = Math.floor(Math.random() * Math.floor(100))
+          let newHealth = Math.floor(Math.random() * Math.floor(100))
+          fetch(`http://localhost:3000/morties/${this.props.currentCardMorty}`,{
+              method: "PATCH",
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                  rickID: this.props.currentRick.id,
+                  mortyId: parseInt(this.props.currentCardMorty),
+                  food: newFood,
+                  health: newHealth,
+                  level: this.state.level + 1
+             		
+            })
+          })
+              .then(resp=>resp.json())
+              .then(player=>{
+                this.setState({
+                  food: player.morties.food,
+                  health: player.morties.health,
+                  level: player.morties.level
+                })
+              })
+          
+          }
     render(){
+      // let t = this 
+      // debugger
       
         return(
             <div>
@@ -103,9 +188,9 @@ export default class MyMorty extends React.Component{
                         top:   400,
                         left:  700,
                         }}>
-                      <Button onClick={this.handleFoodLvL}>Feed</Button>
-                      <Button onClick={this.handleHealth}>Heal</Button>
-                      <Button onClick={()=>{this.props.handleRemoveMorty(parseInt(this.props.currentCardMorty))}} >Kill</Button>
+                      <Button onClick={this.handleStatsFood}>Feed</Button>
+                      <Button onClick={this.handleStatsHealth}>Heal</Button>
+                      <Button onClick={()=>{this.props.handleRemoveMorty(parseInt(this.props.morties.filter(morty => morty.id === parseInt(this.props.currentCardMorty))[0].id))}} >Kill</Button>
                     </div>
                   <Card style={{
                         position: 'relative',
@@ -113,9 +198,9 @@ export default class MyMorty extends React.Component{
                         left:  300,
                         }}>
 
-                    <Image src={Morties[this.props.currentCardMorty]} wrapped ui={false} />
+                    <Image src={Morties[this.props.morties.find(morty => morty.id === parseInt(this.props.currentCardMorty)).morty]} wrapped ui={false} />
                         <Card.Content>
-                            <Card.Header>{Names[this.props.currentCardMorty]}</Card.Header>
+                            <Card.Header>{Names[this.props.morties.filter(morty => morty.id === parseInt(this.props.currentCardMorty))[0].morty]}</Card.Header>
                    
                             </Card.Content>
                      

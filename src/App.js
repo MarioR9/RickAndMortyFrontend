@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
 import './App.css';
 import ProfilePage from './components/ProfilePage';
@@ -32,7 +32,8 @@ export default class App extends React.Component {
         mortyPage: false,
         renderNewMorty: false,
         currentCardMorty: 0,
-        value: null
+        value: 'Easy Mode 🤪',
+        mortyID: 0
         }
       }
      
@@ -42,6 +43,15 @@ export default class App extends React.Component {
         this.setState({
           loginPage: false,
           profilePage: true
+        })
+      }else{
+        this.setState({
+        loginPage: true,
+        profilePage: false,
+        stageMode: false,
+        newUserPage: false,
+        onlineMode: false,
+        editUser: false
         })
       }
         fetch('http://localhost:3000/ricks')
@@ -120,6 +130,7 @@ export default class App extends React.Component {
     handleNewUserCreation=()=>{
      this.setState({
       loginPage: false,
+      mortyPage: false,
       newUserPage: true
      })
     }
@@ -130,6 +141,7 @@ export default class App extends React.Component {
       toke: newRick.token,
       currentMorties: newRick.morties,
       profilePage: true,
+      newUserPage:false
   
      })
      localStorage.setItem("token", newRick.token)
@@ -182,7 +194,7 @@ export default class App extends React.Component {
       if(this.state.value ==='Hard Mode! 😱'){
         return 3
       }else if (this.state.value === 'Easy Mode 🤪'){
-        return 6
+        return 8
       }
     }
     handleNewMorty=(morty)=>{
@@ -232,7 +244,7 @@ export default class App extends React.Component {
 
     handleRemoveMorty=(mortyID)=>{
       
-      fetch(`http://localhost:3000/morties/${mortyID}`, {
+      fetch(`http://localhost:3000/morties/${parseInt(mortyID)}`, {
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',
@@ -245,17 +257,20 @@ export default class App extends React.Component {
          })
       .then(resp => resp.json())
       .then(data=>{
-        
+        // debugger
           console.log("morty removed")
           this.setState({
             currentRick: data.user,
-            currentMorties: data.morties
+            currentMorties: data.morties,
+            mortyPage: false,
+      
           })
           if(this.state.stageMode === true){
             return null
           }else{
             this.setState({
               profilePage: true
+
             })
           }
         
@@ -282,14 +297,19 @@ export default class App extends React.Component {
       value: e.currentTarget.children[0].defaultValue 
     })
   }
+  handleMortyId=(id)=>{
+    this.setState({
+      mortyID: id
+    })
+  }
    
    handlePage=()=>{
      if(this.state.profilePage === true ){
       
-       return <ProfilePage value={this.state.value} handleChange={this.handleChange} handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
+       return <ProfilePage handleMortyId={this.handleMortyId} value={this.state.value} handleChange={this.handleChange} handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
      }else if(this.state.stageMode === true){
 
-       return <Stage  handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty} rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
+       return <Stage handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty} rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
      }else if(this.state.loginPage === true){
 
        return <LoginPage  handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
@@ -301,24 +321,37 @@ export default class App extends React.Component {
      }else if(this.state.editUser === true){
        return <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
      }else if(this.state.mortyPage === true){
-      return <MyMorty morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty}/>
+      return <MyMorty mortyID={this.mortyID} morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty} currentRick={this.state.currentRick}/>
 
      }
    }
 
   render(){
-    return (
-      <div>
-      <div class="ui inverted menu">
-      <a class="active red item" onClick={this.handleLogOut} >LogOut</a>
+    let online = <OnlineMode/>
 
-      {localStorage.getItem("token")?<a class="active purple item" onClick={this.handleBackToProfile} >Profile</a>:null}
-      {this.state.newUserPage === true ? <a class="active green item" onClick={this.handleBackToLogin} >Home</a>:null }
+    let stage = <Stage handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty} rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
+
+    let profilepage = <ProfilePage handleMortyId={this.handleMortyId} value={this.state.value} handleChange={this.handleChange} handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
+
+    let loginpage = <LoginPage  handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
+
+    let newuser = <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
     
-      </div>
+    let edituser = <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
+    let mymorty = <MyMorty mortyID={this.mortyID} morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty} currentRick={this.state.currentRick}/>
+
+
+    return (
+        <div>
       
-          {this.handlePage()}
-       
+        <div class="ui inverted menu">
+        <a class="active red item" onClick={this.handleLogOut} >LogOut</a>
+
+        {localStorage.getItem("token")?<a class="active purple item" onClick={this.handleBackToProfile} >Profile</a>:null}
+        {this.state.newUserPage === true ? <a class="active green item" onClick={this.handleBackToLogin} >Home</a>:null }
+        </div>
+  
+        {this.handlePage()}
       </div>
       )
     }
