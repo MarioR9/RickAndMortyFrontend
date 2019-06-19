@@ -64,9 +64,11 @@ export default class Stage extends React.Component{
                     left: this.state.mortyLocationy,
                     width: 65
                     }} >
+                    
                     <Morty currentMorty={this.state.currentMorty}/>
                 </div>
                 </div>
+                
             </div>
         )}
 }

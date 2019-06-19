@@ -158,7 +158,7 @@ export default class ProfilePage extends React.Component{
                             left: 0,
                             width: 700}}
                         itemsPerRow={6}>
-                   {this.props.morties.map(morty => <Card onClick={this.props.handleMortyPage} raised image={
+                   {this.props.morties.map(morty => <Card id={morty.morty} onClick={this.props.handleMortyPage} raised image={
                     
                              <Spritesheet
                              style={{
