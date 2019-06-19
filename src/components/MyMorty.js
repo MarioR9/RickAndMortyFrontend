@@ -33,11 +33,21 @@ export default class MyMorty extends React.Component{
 
     constructor(){
       super()
+     
       this.state={
         food: 1,
         health: 1,
         level: 0
       }
+    }
+
+    componentDidMount=()=>{
+      this.setState({
+        food: this.props.morties.filter(morty => morty.morty === parseInt(this.props.currentCardMorty))[0].food,
+        health: this.props.morties.filter(morty => morty.morty === parseInt(this.props.currentCardMorty))[0].health,
+        level: this.props.morties.filter(morty => morty.morty === parseInt(this.props.currentCardMorty))[0].level
+        
+      })
     }
 
     handleFoodLvL=()=>{
@@ -51,6 +61,7 @@ export default class MyMorty extends React.Component{
       })
     }
     render(){
+      
         return(
             <div>
                 
@@ -62,7 +73,7 @@ export default class MyMorty extends React.Component{
                         height: '0px'
                         }}>
                       <Progress percent={this.state.food} warning>
-                        <h3>Food {this.state.food} <Icon className='food'></Icon></h3>
+                        <h3>Food  <Icon className='food'></Icon></h3>
                       </Progress>
                     </div>
                     <div style={{
@@ -73,7 +84,7 @@ export default class MyMorty extends React.Component{
                         height: '0px'
                         }}>
                       <Progress percent={this.state.health} error>
-                        <h3>Health {this.state.health} <Icon className='heart'></Icon></h3>
+                        <h3>Health <Icon className='heart'></Icon></h3>
                       </Progress>
                     </div>
                     <div style={{
@@ -83,8 +94,8 @@ export default class MyMorty extends React.Component{
                         width: '200px',
                         height: '0px'
                         }}>
-                      <Progress percent={20} success>
-                        <h3>to LvL 2<Icon className='rebel'></Icon></h3>
+                      <Progress percent={this.state.level} success>
+                        <h3>LVL: {this.state.level} <Icon className='rebel'></Icon></h3>
                       </Progress>
                     </div>
                     <div style={{

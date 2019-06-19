@@ -258,8 +258,8 @@ export default class Rick extends React.Component{
                     widthFrame={128}
                     heightFrame={159}
                     steps={4}
-                    fps={8}
-                    autoplay={false}
+                    fps={6}
+                    autoplay={true}
                     loop={true}
                     onMouseEnter={spritesheet => {
                         spritesheet.play();

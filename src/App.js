@@ -31,7 +31,8 @@ export default class App extends React.Component {
         token: "",
         mortyPage: false,
         renderNewMorty: false,
-        currentCardMorty: 0
+        currentCardMorty: 0,
+        value: null
         }
       }
      
@@ -177,10 +178,18 @@ export default class App extends React.Component {
         profilePage: false
        })
     }
+    handleValueState=()=>{
+      if(this.state.value ==='Hard Mode! 😱'){
+        return 3
+      }else if (this.state.value === 'Easy Mode 🤪'){
+        return 6
+      }
+    }
     handleNewMorty=(morty)=>{
-
-      console.log("clicked")
-      fetch('http://localhost:3000/morties',{
+    
+        if(Math.floor(Math.random() * Math.floor(10)) < this.handleValueState()){
+     
+        fetch('http://localhost:3000/morties',{
         method: "POST",
         headers: {
             'Accept': 'application/json',
@@ -188,6 +197,9 @@ export default class App extends React.Component {
           },
           body: JSON.stringify({
             morty: morty,
+            food: Math.floor(Math.random() * Math.floor(100)),
+            health: Math.floor(Math.random() * Math.floor(100)),
+            level: Math.floor(Math.random() * Math.floor(100)),
             rickID: this.state.currentRick.id
             })
           })
@@ -203,6 +215,14 @@ export default class App extends React.Component {
                 })
               }
           })
+        }else{
+          alert("wubba lubba dub dub")
+          this.setState({
+            renderNewMorty: true
+          })
+          
+          
+        }
     }
     handleRenderMortyToFalse=()=>{
       this.setState({
@@ -256,18 +276,23 @@ export default class App extends React.Component {
         loginPage: true
       })
     }
-   
+    handleChange = (e) => {
+    
+    this.setState({ 
+      value: e.currentTarget.children[0].defaultValue 
+    })
+  }
    
    handlePage=()=>{
      if(this.state.profilePage === true ){
       
-       return <ProfilePage  handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
+       return <ProfilePage value={this.state.value} handleChange={this.handleChange} handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
      }else if(this.state.stageMode === true){
 
-       return <Stage handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty}rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
+       return <Stage  handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty} rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
      }else if(this.state.loginPage === true){
 
-       return <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
+       return <LoginPage  handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
      }else if(this.state.newUserPage === true){
 
        return <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
@@ -276,7 +301,7 @@ export default class App extends React.Component {
      }else if(this.state.editUser === true){
        return <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
      }else if(this.state.mortyPage === true){
-      return <MyMorty handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty}/>
+      return <MyMorty morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty}/>
 
      }
    }

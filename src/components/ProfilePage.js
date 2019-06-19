@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image,Form, Radio } from 'semantic-ui-react'
 import playButton from '../assets/PlayButton.png'
 import Spritesheet from 'react-responsive-spritesheet'
 
@@ -56,8 +56,11 @@ import PunkMorty from '../assets/Morties/walkingSprites/PunkMorty.png'
 import BananaMorty from '../assets/Morties/walkingSprites/BananaMorty.png'
 
 export default class ProfilePage extends React.Component{
+    
+    
+    
 
-
+    
     componentDidMount(){
         //check localStorage has a token
         let token = localStorage.getItem("token")
@@ -145,7 +148,33 @@ export default class ProfilePage extends React.Component{
                         backgroundPosition: '100, 100',
                         width: '90px',
                         height: '90px',}} >ONLINE!</button>
-
+                        <div style={{
+                        position: 'absolute',
+                        top: 700,
+                        left: 800}}>
+                        <Form>
+                            <Form.Field>
+                            Selected value: <b>{this.props.value}</b>
+                            </Form.Field>
+                            <Form.Field>
+                            <Radio
+                                label='Easy Mode'
+                                name='radioGroup'
+                                value='Easy Mode 🤪'
+                                checked={this.props.value === 'Easy Mode 🤪'}
+                                onChange={this.props.handleChange}/>
+                            </Form.Field>
+                            <Form.Field>
+                            <Radio
+                                label='Hard Mode'
+                                name='radioGroup'
+                                value='Hard Mode! 😱'
+                                checked={this.props.value === 'Hard Mode! 😱'}
+                                onChange={this.props.handleChange}
+                            />
+                            </Form.Field>
+                        </Form>
+                    </div>
                 <div style={{
                             position: 'absolute',
                             top: 90,
