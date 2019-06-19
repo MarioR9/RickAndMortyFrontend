@@ -146,13 +146,16 @@ export default class Rick extends React.Component{
                        
             if(MortyLocations.find(loc => loc.includes(rickLocation[0][0]) && loc.includes(rickLocation[0][1]))){
             console.log("Collision!")
-            // debugger
+             if(this.props.renderNewMorty === true){
+                this.props.handleMortyLocation()
+             }   
+            
             return(
        
                 <div class="bg-modal" style={{display: 'flex'}}>
                    <div class="modal-contents">
                    <Button onClick={()=>{this.props.handleNewMorty(this.props.currentMorty)}}>Catch</Button>
-                     
+                   <Button onClick={()=>{this.props.handleMortyLocation()}}>!Pass</Button>
 
                    <Card style={{
                     position: 'absolute',
@@ -178,6 +181,7 @@ export default class Rick extends React.Component{
                    </div>
                </div>
                 )
+                
         }
     }
     

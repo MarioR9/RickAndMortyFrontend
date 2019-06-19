@@ -28,7 +28,8 @@ export default class App extends React.Component {
         age: 0,
         newMortyName: "",
         token: "",
-        mortyPage: false
+        mortyPage: false,
+        renderNewMorty: false
         }
       }
      
@@ -196,10 +197,15 @@ export default class App extends React.Component {
                 this.setState({
                   currentRick: data.user,
                   currentMorties: data.morties,
-                 
+                  renderNewMorty: true
                 })
               }
           })
+    }
+    handleRenderMortyToFalse=()=>{
+      this.setState({
+        renderNewMorty: false
+      })
     }
 
     handleRemoveMorty=(mortyID)=>{
@@ -250,7 +256,7 @@ export default class App extends React.Component {
        return <ProfilePage handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
      }else if(this.state.stageMode === true){
 
-       return <Stage handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty}rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
+       return <Stage handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty}rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
      }else if(this.state.loginPage === true){
 
        return <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
