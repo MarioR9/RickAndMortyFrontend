@@ -241,7 +241,7 @@ export default class App extends React.Component {
         renderNewMorty: false
       })
     }
-
+//remove morty by ID
     handleRemoveMorty=(mortyID)=>{
       
       fetch(`http://localhost:3000/morties/${parseInt(mortyID)}`, {

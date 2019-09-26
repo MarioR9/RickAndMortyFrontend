@@ -94,9 +94,6 @@ export default class LoginPage extends React.Component{
     
 
     render(){
-    //    let t = this
-    //    debugger
-
         return(
             <div style={{
                 position: 'absolute',
