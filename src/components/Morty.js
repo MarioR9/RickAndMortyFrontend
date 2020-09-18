@@ -34,8 +34,6 @@ let Morties = [DevilMorty,GreaserMorty,SuperRickFanMorty,TheOneTrueMorty,TwoCatM
 
 export default class Morty extends React.Component{
     render(){
-        // let t = this 
-        // debugger
         return(
             <div>
                <div> 
