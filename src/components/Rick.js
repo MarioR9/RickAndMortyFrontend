@@ -88,7 +88,7 @@ export default class Rick extends React.Component{
             })
             
         }
-        handleCollision=()=>{
+        handleCollision=()=>{  //collision system
             let MortyLocations= [
                 //bottom approach
                 [this.props.mortyx, this.props.mortyy]
