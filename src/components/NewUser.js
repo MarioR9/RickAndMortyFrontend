@@ -98,10 +98,8 @@ let randSelectionMorty = Morties[Math.floor(Math.random() * Morties.length)];
 
 export default class NewUser extends React.Component{
     
-    constructor(){
+    constructor(){ //states
         super()
-        
-      
         this.state={
             currentRick: <Spritesheet style={{
                 backgroundColor: "#dadbde"}}
