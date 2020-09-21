@@ -5,7 +5,6 @@ import rickandmortyred from '../assets/rickandmortyred.jpg'
 import map2 from '../assets/alien_planet_png_27989.png'
 
 
-/
 let x = Math.floor(Math.random() * Math.floor(600))
 let y = Math.floor(Math.random() * Math.floor(200))
 export default class Stage extends React.Component{

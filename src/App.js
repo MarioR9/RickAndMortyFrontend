@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect, Switch, Link } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
 import './App.css';
 import ProfilePage from './components/ProfilePage';
@@ -102,7 +102,6 @@ export default class App extends React.Component {
         })
           .then(resp=>resp.json())
           .then(data=>{
-            // debugger
             console.log(data.token)
             console.log(data.user)
             if(data.message){
@@ -241,7 +240,6 @@ export default class App extends React.Component {
         renderNewMorty: false
       })
     }
-//remove morty by ID
     handleRemoveMorty=(mortyID)=>{
       
       fetch(`http://localhost:3000/morties/${parseInt(mortyID)}`, {
@@ -286,10 +284,7 @@ export default class App extends React.Component {
       })
     }
     handleBackToLogin=()=>{
-      this.setState({
-        newUserPage: false,
-        loginPage: true
-      })
+     return <Link to="/home"/>
     }
     handleChange = (e) => {
     
@@ -302,56 +297,41 @@ export default class App extends React.Component {
       mortyID: id
     })
   }
-   
-   handlePage=()=>{
-     if(this.state.profilePage === true ){
-      
-       return <ProfilePage handleMortyId={this.handleMortyId} value={this.state.value} handleChange={this.handleChange} handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
-     }else if(this.state.stageMode === true){
-
-       return <Stage handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty} rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
-     }else if(this.state.loginPage === true){
-
-       return <LoginPage  handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
-     }else if(this.state.newUserPage === true){
-
-       return <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
-     }else if(this.state.onlineMode === true){
-       return <OnlineMode/>
-     }else if(this.state.editUser === true){
-       return <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
-     }else if(this.state.mortyPage === true){
-      return <MyMorty mortyID={this.mortyID} morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty} currentRick={this.state.currentRick}/>
-
-     }
-   }
-
   render(){
-    let online = <OnlineMode/>
-
-    let stage = <Stage handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty} rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
-
-    let profilepage = <ProfilePage handleMortyId={this.handleMortyId} value={this.state.value} handleChange={this.handleChange} handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
-
-    let loginpage = <LoginPage  handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
-
-    let newuser = <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
-    
-    let edituser = <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
-    let mymorty = <MyMorty mortyID={this.mortyID} morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty} currentRick={this.state.currentRick}/>
-
-
     return (
         <div>
       
         <div class="ui inverted menu">
         <a class="active red item" onClick={this.handleLogOut} >LogOut</a>
 
-        {localStorage.getItem("token")?<a class="active purple item" onClick={this.handleBackToProfile} >Profile</a>:null}
-        {this.state.newUserPage === true ? <a class="active green item" onClick={this.handleBackToLogin} >Home</a>:null }
+        {localStorage.getItem("token")?<a class="active purple item" href="/profile">Profile</a>:null}
+        { <Route path="/newuser"/> ? <a class="active green item" href="/home">Home</a>:null }
         </div>
-  
-        {this.handlePage()}
+        <Router>
+        <div>  
+          <Switch>
+          <Route exact path='/'><Redirect to="/home" />
+          <LoginPage  handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
+          </Route>
+          <Route path="/newuser">
+          <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
+          </Route>
+          <Route path="/stage">
+          <Stage handleRenderMortyToFalse={this.handleRenderMortyToFalse} renderNewMorty={this.state.renderNewMorty} handleRemoveMorty={this.handleRemoveMorty}newMorty={this.state.newMorty} handleNewMorty={this.handleNewMorty} rick={this.state.currentRick} morties={this.state.currentMorties} handleLogOut={this.handleLogOut} handleBackToProfile={this.handleBackToProfile}/>
+          </Route>
+          <Route path="/profile">
+          <ProfilePage handleMortyId={this.handleMortyId} value={this.state.value} handleChange={this.handleChange} handleMortyPage={this.handleMortyPage} handleLogOut={this.handleLogOut} handlePlayMode={this.handlePlayMode} rick={this.state.currentRick} morties={this.state.currentMorties} handleProfileUser={this.handleProfileUser} handleOnlineMode={this.handleOnlineMode} handleEditUser={this.handleEditUser}/>  
+          </Route>
+          <Route path="/edit">
+          <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
+          </Route>
+          <Route path="/morty">
+          <MyMorty mortyID={this.mortyID} morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty} currentRick={this.state.currentRick}/>
+          </Route>
+          </Switch>
+        </div>
+      </Router>
+      
       </div>
       )
     }
