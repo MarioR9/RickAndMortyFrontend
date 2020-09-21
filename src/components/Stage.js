@@ -1,10 +1,11 @@
 import React from 'react'
 import Rick from './Rick'
-// import map from '../assets/testMap.png'
 import Morty from './Morty'
 import rickandmortyred from '../assets/rickandmortyred.jpg'
 import map2 from '../assets/alien_planet_png_27989.png'
-// import map3 from '../assets/planet.jpg'
+
+
+/
 let x = Math.floor(Math.random() * Math.floor(600))
 let y = Math.floor(Math.random() * Math.floor(200))
 export default class Stage extends React.Component{
