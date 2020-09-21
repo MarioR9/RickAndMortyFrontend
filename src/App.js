@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch, Link } from 'react-router-dom'
 import LoginPage from './components/LoginPage'
 import './App.css';
@@ -102,19 +102,16 @@ export default class App extends React.Component {
         })
           .then(resp=>resp.json())
           .then(data=>{
-            console.log(data.token)
-            console.log(data.user)
             if(data.message){
               alert(data.message)
             }else{
               this.setState({
                 currentRick: data.user,
                 token: data.token,
-                currentMorties: data.morties,
-                loginPage: false,
-                profilePage: true
+                currentMorties: data.morties
               })
               localStorage.setItem("token", data.token)
+             return <Redirect to='/profile'/>
             }
           })
       
@@ -126,15 +123,7 @@ export default class App extends React.Component {
       profilePage: false
      })
     }
-    handleNewUserCreation=()=>{
-     this.setState({
-      loginPage: false,
-      mortyPage: false,
-      newUserPage: true
-     })
-    }
     handleCurrentUser=(newRick)=>{
-    //  debugger
      this.setState({
       currentRick: newRick.user,
       toke: newRick.token,
@@ -295,12 +284,12 @@ export default class App extends React.Component {
         <div class="ui inverted menu">
         {localStorage.getItem("token")?<a class="active red item" href="/home" onClick={this.handleLogOut} >Logout</a>:null }
         {localStorage.getItem("token")?<a class="active purple item" href="/profile">Profile</a>:null}
-        <a class="active green item" href="/">Home</a>
         </div>
         <Router>
         <div>  
           <Switch>
-          <Route path='/'>
+          <Route exact path='/'><Redirect to='/home'/></Route>
+          <Route>
           <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
           </Route>
           <Route path="/newuser">

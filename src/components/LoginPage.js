@@ -43,10 +43,10 @@ export default class LoginPage extends React.Component{
                         </div>
                         </div>
                         <div class="middle aligned column">
-                        <div onClick={this.props.handleNewUserCreation} class="ui big button">
+                        <a href="/newuser" class="ui big button">
                             <i  class="signup icon"></i>
                             Sign Up
-                        </div>
+                        </a>
                         </div>
                     </div>
                     <div class="ui vertical divider">
