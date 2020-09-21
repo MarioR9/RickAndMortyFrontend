@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, Icon, Image, Progress, Button } from 'semantic-ui-react'
-// import alone from '../assets/alone.png'
+
 import AquaMorty from '../assets/Morties/profile/AquaMorty.png'
 import BananaMorty from '../assets/Morties/profile/BananaMorty.png'
 import BeardMorty from '../assets/Morties/profile/BeardMorty.png'
