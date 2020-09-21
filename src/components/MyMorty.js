@@ -1,9 +1,5 @@
 import React from 'react'
 import { Card, Icon, Image, Progress, Button } from 'semantic-ui-react'
-<<<<<<< HEAD
-=======
-
->>>>>>> a942502a6667156efcf31e3616dee56344793264
 import AquaMorty from '../assets/Morties/profile/AquaMorty.png'
 import BananaMorty from '../assets/Morties/profile/BananaMorty.png'
 import BeardMorty from '../assets/Morties/profile/BeardMorty.png'
@@ -68,13 +64,11 @@ export default class MyMorty extends React.Component{
               mortyId: parseInt(this.props.currentCardMorty),
               food: this.state.food + 5,
               health: this.state.health,
-              level: this.state.level 
-          //   MortyId: this.state.MortyId //hard code morty		
+              level: this.state.level 	
         })
       })
       .then(resp=>resp.json())
       .then(player=>{
-        // debugger
          this.setState({
            food: player.morties.food
           })
@@ -101,8 +95,7 @@ export default class MyMorty extends React.Component{
                 mortyId: parseInt(this.props.currentCardMorty),
                 food: this.state.food,
                 health: this.state.health + 5,
-                level: this.state.level
-            //   MortyId: this.state.MortyId //hard code morty		
+                level: this.state.level	
             })
           })
           .then(resp=>resp.json())
@@ -144,9 +137,6 @@ export default class MyMorty extends React.Component{
           
           }
     render(){
-      // let t = this 
-      // debugger
-      
         return(
             <div>
                 
@@ -201,12 +191,8 @@ export default class MyMorty extends React.Component{
                     <Image src={Morties[this.props.morties.find(morty => morty.id === parseInt(this.props.currentCardMorty)).morty]} wrapped ui={false} />
                         <Card.Content>
                             <Card.Header>{Names[this.props.morties.filter(morty => morty.id === parseInt(this.props.currentCardMorty))[0].morty]}</Card.Header>
-                   
                             </Card.Content>
-                     
                 </Card>
-
-                
             </div>
         )
     }
