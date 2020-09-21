@@ -188,8 +188,8 @@ export default class ProfilePage extends React.Component{
                             width: 700}}
                         itemsPerRow={6}>
                              
-                   {this.props.morties.map(morty => <Card id={morty.id} onClick={this.props.handleMortyPage} 
-                    > <Spritesheet
+                   {this.props.morties.map(morty => <Card id={morty.id} href={`/morty/${morty.id}`}> 
+                   <Spritesheet
                      style={{
                         backgroundColor: "#f94b17"}}
                      className={`my-element__class--style`}

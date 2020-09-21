@@ -16,12 +16,6 @@ export default class App extends React.Component {
       super()
       this.state={
         ricks: [],
-        loginPage: true,
-        profilePage: false,
-        stageMode: false,
-        newUserPage: false,
-        onlineMode: false,
-        editUser: false,
         currentRick: [],
         currentMorties: [],
         username: "",
@@ -40,19 +34,9 @@ export default class App extends React.Component {
 
     componentDidMount=()=>{
       if(localStorage.getItem("token")){
-        this.setState({
-          loginPage: false,
-          profilePage: true
-        })
+        return <Redirect to='/profile'/>
       }else{
-        this.setState({
-        loginPage: true,
-        profilePage: false,
-        stageMode: false,
-        newUserPage: false,
-        onlineMode: false,
-        editUser: false
-        })
+        return <Redirect to='/home'/>
       }
         fetch('http://localhost:3000/ricks')
         .then(resp=>resp.json())
@@ -111,7 +95,7 @@ export default class App extends React.Component {
                 currentMorties: data.morties
               })
               localStorage.setItem("token", data.token)
-             return <Redirect to='/profile'/>
+             return <Route path="/profile"/>
             }
           })
       
@@ -127,9 +111,7 @@ export default class App extends React.Component {
      this.setState({
       currentRick: newRick.user,
       toke: newRick.token,
-      currentMorties: newRick.morties,
-      profilePage: true,
-      newUserPage:false
+      currentMorties: newRick.morties
   
      })
      localStorage.setItem("token", newRick.token)
@@ -143,22 +125,14 @@ export default class App extends React.Component {
     handleProfileForEditedUser=(profileUser,profileMorties)=>{
     this.setState({
       currentRick: profileUser,
-      currentMorties: profileMorties,
-      editUser: false,
-      profilePage: true
+      currentMorties: profileMorties
     })
     }
   
     handleLogOut=()=>{
      localStorage.clear()
     }
-    handleBackToProfile=()=>{
-      this.setState({
-        stageMode: false,
-        profilePage: true
- 
-      })
-    }
+
     handleOnlineMode=()=>{
        this.setState({
         onlineMode: true,
@@ -166,12 +140,7 @@ export default class App extends React.Component {
        })
        localStorage.clear()
     }
-    handleEditUser=()=>{
-       this.setState({
-        editUser: true,
-        profilePage: false
-       })
-    }
+    
     handleValueState=()=>{
       if(this.state.value ==='Hard Mode! 😱'){
         return 3
@@ -259,11 +228,8 @@ export default class App extends React.Component {
 
     }
     handleMortyPage=(e)=>{
-      
       this.setState({
-        currentCardMorty: e.currentTarget.id,
-        profilePage:false,
-        mortyPage: true
+        currentCardMorty: e.currentTarget.id
       })
     }
     handleChange = (e) => {
@@ -279,7 +245,7 @@ export default class App extends React.Component {
   }
   render(){
     return (
-        <div>
+        <div> 
       
         <div class="ui inverted menu">
         {localStorage.getItem("token")?<a class="active red item" href="/home" onClick={this.handleLogOut} >Logout</a>:null }
@@ -288,8 +254,7 @@ export default class App extends React.Component {
         <Router>
         <div>  
           <Switch>
-          <Route exact path='/'><Redirect to='/home'/></Route>
-          <Route>
+          <Route path='/home'>
           <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
           </Route>
           <Route path="/newuser">
@@ -304,7 +269,7 @@ export default class App extends React.Component {
           <Route path="/edit">
           <EditUser avatar={this.state.currentRick} handleProfileForEditedUser={this.handleProfileForEditedUser}/>
           </Route>
-          <Route path="/morty">
+          <Route path={`/morty/${this.state.mortyID}`}>
           <MyMorty mortyID={this.mortyID} morties={this.state.currentMorties} handleRemoveMorty={this.handleRemoveMorty} currentCardMorty={this.state.currentCardMorty} currentRick={this.state.currentRick}/>
           </Route>
           </Switch>
