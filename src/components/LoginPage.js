@@ -53,28 +53,6 @@ export default class LoginPage extends React.Component{
                         Or
                     </div>
                     </div>
-
-                {/* <div className="column" style={{
-                        position: 'absolute',
-                        top: 90,
-                        left: 160}} >
-            
-                    <Input onChange={this.props.handleUser} type="text"/>
-                
-                    <br></br>
-                    
-                    <Input onChange={this.props.handlePassword} type="text"/>
-                    <br></br>
-                    <Button animated onClick={this.props.handleLogIn}>
-                        <Button.Content visible>Login</Button.Content>
-                        <Button.Content hidden>
-                            <Icon name='arrow right' />
-                        </Button.Content>
-                    </Button>
-                    <div>
-                    <Button onClick={this.props.handleNewUserCreation}>Sign Up</Button>
-                    </div>
-                </div> */}
             </div>
         </div>
          )

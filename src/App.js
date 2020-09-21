@@ -162,12 +162,6 @@ export default class App extends React.Component {
   
     handleLogOut=()=>{
      localStorage.clear()
-     this.setState({
-       profilePage: false,
-       loginPage: true,
-       stageMode: false
-
-     })
     }
     handleBackToProfile=()=>{
       this.setState({
@@ -283,9 +277,6 @@ export default class App extends React.Component {
         mortyPage: true
       })
     }
-    handleBackToLogin=()=>{
-     return <Link to="/home"/>
-    }
     handleChange = (e) => {
     
     this.setState({ 
@@ -302,16 +293,15 @@ export default class App extends React.Component {
         <div>
       
         <div class="ui inverted menu">
-        <a class="active red item" onClick={this.handleLogOut} >LogOut</a>
-
+        {localStorage.getItem("token")?<a class="active red item" href="/home" onClick={this.handleLogOut} >Logout</a>:null }
         {localStorage.getItem("token")?<a class="active purple item" href="/profile">Profile</a>:null}
-        { <Route path="/newuser"/> ? <a class="active green item" href="/home">Home</a>:null }
+        <a class="active green item" href="/">Home</a>
         </div>
         <Router>
         <div>  
           <Switch>
-          <Route exact path='/'><Redirect to="/home" />
-          <LoginPage  handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
+          <Route path='/'>
+          <LoginPage handleUser={this.handleUser} handlePassword={this.handlePassword} handleLogIn={this.handleLogIn} handleNewUserCreation={this.handleNewUserCreation}/>
           </Route>
           <Route path="/newuser">
           <NewUser handleCurrentUser={this.handleCurrentUser} handleUser={this.handleUser} handleAge={this.handleAge} handleMortyName={this.handleMortyName}/>
