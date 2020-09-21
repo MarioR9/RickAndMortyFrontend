@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react'
 import { Card, Input ,Container ,Image } from 'semantic-ui-react'
 import Spritesheet from 'react-responsive-spritesheet'
-
 import CowboyRickP from '../assets/Ricks/Profile/CowboyRick.png'
 import DoofusRickP from '../assets/Ricks/Profile/DoofusRick.png'
 import pickleRickP from '../assets/Ricks/Profile/pickleRick.png'
@@ -26,7 +25,6 @@ import ChairRickP from '../assets/Ricks/Profile/ChairRick.png'
 import BubbleGumRickP from '../assets/Ricks/Profile/BubbleGumRick.png'
 import AquaRickP from '../assets/Ricks/Profile/AquaRick.png'
 import AlienRick2ArmsP from '../assets/Ricks/Profile/AlienRick2Arms.png'
-
 import CowboyRick from '../assets/Ricks/walkingSprites/CowboyRick.png'
 import DoofusRick from '../assets/Ricks/walkingSprites/DoofusRick.png'
 import pickleRick from '../assets/Ricks/walkingSprites/pickleRick.png'
@@ -51,7 +49,6 @@ import ChairRick from '../assets/Ricks/walkingSprites/ChairRick.png'
 import BubbleGumRick from '../assets/Ricks/walkingSprites/BubbleGumRick.png'
 import AquaRick from '../assets/Ricks/walkingSprites/AquaRick.png'
 import AlienRick2Arms from '../assets/Ricks/walkingSprites/AlienRick2Arms.png'
-
 import DevilMorty from '../assets/Morties/walkingSprites/DevilMorty.png'
 import GreaserMorty from '../assets/Morties/walkingSprites/GreaserMorty.png'
 import SuperRickFanMorty from '../assets/Morties/walkingSprites/SuperRickFanMorty.png'

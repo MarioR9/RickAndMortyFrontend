@@ -1,6 +1,5 @@
 import React from 'react'
 import { Card, Icon, Image, Progress, Button } from 'semantic-ui-react'
-// import alone from '../assets/alone.png'
 import AquaMorty from '../assets/Morties/profile/AquaMorty.png'
 import BananaMorty from '../assets/Morties/profile/BananaMorty.png'
 import BeardMorty from '../assets/Morties/profile/BeardMorty.png'
@@ -33,7 +32,6 @@ export default class MyMorty extends React.Component{
 
     constructor(){
       super()
-     
       this.state={
         food: null,
         health: null,
@@ -50,8 +48,6 @@ export default class MyMorty extends React.Component{
       
     }
     handleStatsFood=(e)=>{
-      console.log(e)
-      // debugger
       if(this.state.food >= 100 && this.state.health >= 100){
         this.handleStatsLevel()
       }else if(this.state.food >= 100){
